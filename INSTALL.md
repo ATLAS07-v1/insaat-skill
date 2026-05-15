@@ -74,6 +74,13 @@ python scripts\validate_skill_manifest.py --format markdown
 python scripts\run_examples.py --scenario quickstart
 ```
 
+Release paketi bütünlüğünü kontrol etmek için:
+
+```powershell
+python scripts\build_release_artifacts.py --version v0.1.0 --output-dir dist\release
+Get-Content dist\release\SHA256SUMS.txt
+```
+
 ## Onay Sınırı
 
 Kurulum scripti yalnızca yerel dosya kopyalar. Var olan skill klasörlerini değiştirmek için `--force` açıkça verilmelidir. Üçüncü taraf agent ortamına kurulumdan önce hedef klasörün doğru olduğundan emin olun.

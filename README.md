@@ -91,6 +91,16 @@ python scripts\run_examples.py --scenario quickstart
 
 Örnek girdiler ve açıklamalar [examples/README.md](examples/README.md) altında tutulur. Çıktılar varsayılan olarak `dist/example-runs/` altına yazılır.
 
+## Release
+
+Yayın artifact'lerini yerelde üretmek için:
+
+```powershell
+python scripts\build_release_artifacts.py --version v0.1.0 --output-dir dist\release
+```
+
+Release süreci ve tag tabanlı GitHub Actions yayını için [RELEASE.md](RELEASE.md) dosyasına bakın.
+
 ## Manifest ve Doğrulama
 
 Kök `skill-index.json` dosyası tüm skill'lerin makine-okunur index'idir. Her skill içinde aynı şemayı kullanan `agents/openai.yaml` manifesti bulunur.

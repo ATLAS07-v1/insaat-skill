@@ -22,6 +22,8 @@ ROOT_FILES = [
     "README.md",
     "INSTALL.md",
     "DEPENDENCIES.md",
+    "CHANGELOG.md",
+    "RELEASE.md",
     "requirements.txt",
     "pyproject.toml",
     "manifest.schema.json",
