@@ -65,6 +65,22 @@ pip install -e ".[cad,bim,pdf-doc,spreadsheet,image-ocr,data-quality,communicati
 
 Bağımlılık grupları ve sistem araçları için [DEPENDENCIES.md](DEPENDENCIES.md) dosyasına bakın.
 
+## Kurulum ve Paketleme
+
+Skill'leri bir agent skill klasörüne kopyalamak için:
+
+```powershell
+python scripts\install_skills.py --target "C:\path\to\agent\skills" --force
+```
+
+Taşınabilir dağıtım paketi ve zip arşivi üretmek için:
+
+```powershell
+python scripts\package_skills.py --force
+```
+
+Ayrıntılı kurulum ve paketleme adımları için [INSTALL.md](INSTALL.md) dosyasına bakın.
+
 ## Manifest ve Doğrulama
 
 Kök `skill-index.json` dosyası tüm skill'lerin makine-okunur index'idir. Her skill içinde aynı şemayı kullanan `agents/openai.yaml` manifesti bulunur.

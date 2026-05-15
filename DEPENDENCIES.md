@@ -78,4 +78,4 @@ Bu araçlar Python paketi değildir; işletim sistemine ayrıca kurulmalıdır:
 
 - Birçok script opsiyonel paket yoksa anlaşılır hata mesajı veya araç durumu üretir.
 - Finansal, İSG, teknik uygunluk ve üçüncü taraf iletişimi içeren çıktılar insan onayı gerektirir.
-- Faz 3'te `tests/` ve CI eklendiğinde bu bağımlılık grupları test matrisine bağlanmalıdır.
+- Test ve CI hattı, temel manifest ve smoke akışlarını `dev` bağımlılıklarıyla doğrular; domain'e özel ağır bağımlılıklar ayrı ortamda kurulmalıdır.
