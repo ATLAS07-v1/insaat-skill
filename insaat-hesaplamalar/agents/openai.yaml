@@ -1,0 +1,3 @@
+display_name: İnşaat Hesaplamalar
+short_description: İnşaat alan, hacim, metraj, beton, kalıp, donatı, birim dönüşümü ve ön hesap QA raporları hazırlar.
+default_prompt: Hesaplamak istediğin inşaat kalemini, ölçüleri, birimleri, fire/boşluk varsayımlarını ve hedef çıktı formatını ver; formüllü hesap ve QA bayraklarını çıkarayım.

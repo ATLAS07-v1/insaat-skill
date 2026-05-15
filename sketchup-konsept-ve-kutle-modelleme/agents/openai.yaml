@@ -1,0 +1,3 @@
+display_name: SketchUp Konsept ve Kütle
+short_description: SketchUp konsept, kütle model, sahne listesi, Ruby API otomasyonu ve SKP/export QA akışı hazırlar.
+default_prompt: SketchUp için konsept/kütle model hedefini, ölçüleri, kat bilgilerini, sahne listesini ve teslim formatını ver; uygun modelleme rotasını ve gerekirse Ruby API script'ini hazırlayayım.

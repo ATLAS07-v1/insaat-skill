@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blender 3D Modelleme ve Render"
+  short_description: "Ölçülü Blender sahnesi ve render üretir"
+  default_prompt: "Use $blender-3d-modelleme-ve-render to create or plan Blender Python scenes, construction massing models, concept renders, BIM/IFC visualization, and render/export QA."

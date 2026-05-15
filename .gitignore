@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.log
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_dsa

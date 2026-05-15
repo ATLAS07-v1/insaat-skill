@@ -1,0 +1,3 @@
+display_name: Teklif ve Maliyet Tablolama
+short_description: İnşaat BOQ, birim fiyat, markup, KDV, taşeron karşılaştırması ve maliyet QA tabloları hazırlar.
+default_prompt: Kalem listesini, metrajları, birim fiyatları, para birimini ve markup/KDV varsayımlarını ver; teklif-maliyet tablosu, toplamlar, QA bayrakları ve risk notlarını çıkarayım.

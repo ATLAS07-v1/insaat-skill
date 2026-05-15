@@ -1,0 +1,3 @@
+display_name: Çizim Dönüşüm ve QA
+short_description: CAD, BIM, PDF, görsel ve 3D dosyaları için dönüşüm rotası, açık kaynak araç seçimi ve QA raporu hazırlar.
+default_prompt: Dönüştürmek istediğin dosyaları, hedef formatı ve teslim amacını ver; güvenli araç rotasını, komut planını ve QA bayraklarını çıkarayım.

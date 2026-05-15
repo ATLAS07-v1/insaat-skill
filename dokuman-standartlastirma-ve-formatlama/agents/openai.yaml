@@ -1,0 +1,39 @@
+name: dokuman-standartlastirma-ve-formatlama
+version: 0.1.0
+language: tr
+description: İnşaat proje dokümanları için DOCX/PDF/Markdown/XLSX format standardı, revizyon, dosya adlandırma, dönüşüm ve QA kontrolü yapan Hermes/Codex skill tanımı.
+entrypoint: SKILL.md
+tags:
+  - insaat
+  - dokuman
+  - docx
+  - pdf
+  - markdown
+  - revizyon
+  - formatlama
+  - standardizasyon
+  - qa
+inputs:
+  - source_documents
+  - document_type
+  - template_requirements
+  - revision_data
+  - output_format
+  - package_folder
+outputs:
+  - standardized_document
+  - pdf_export
+  - document_manifest
+  - formatting_qa_report
+  - revision_check_report
+  - markdown_lint_report
+guardrails:
+  - Format standardizasyonu teknik, hukuki veya sözleşmesel onay yerine geçmez.
+  - PDF/DOCX dönüşümü sonrası görsel QA yapılmadan teslim tamam sayılmaz.
+  - Placeholder ve örnek metin teslim dokümanında bırakılmaz.
+  - Revizyon, tarih ve doküman kodu çelişkileri bayraklanır.
+tools:
+  check_tools: scripts/check_document_format_tools.py
+  plan_route: scripts/plan_document_standardization_route.py
+  inspect_package: scripts/inspect_document_package.py
+  validate_markdown: scripts/validate_markdown_document.py

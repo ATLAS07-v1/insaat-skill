@@ -1,0 +1,3 @@
+display_name: Metraj ve Mahal Kontrolü
+short_description: Mahal listesi, room/space schedule, metraj, alan, hacim ve kaynaklar arası sapma QA raporu hazırlar.
+default_prompt: Kontrol edilecek mahal/metraj kaynaklarını, kolon adlarını, toleransı ve net/brüt ölçüm kuralını ver; sapma ve QA raporunu çıkarayım.

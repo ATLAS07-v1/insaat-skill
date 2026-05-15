@@ -1,0 +1,3 @@
+display_name: Hakediş ve Mutabakat Kontrolü
+short_description: Hakediş icmali, metraj-fatura-ödeme mutabakatı, avans/teminat/KDV/kesinti ve fark QA raporu hazırlar.
+default_prompt: Sözleşme kalemlerini, önceki hakedişi, cari onaylı miktarları, fatura/ödeme kayıtlarını ve kesinti varsayımlarını ver; hakediş hesabı, mutabakat farkları ve QA bayraklarını çıkarayım.

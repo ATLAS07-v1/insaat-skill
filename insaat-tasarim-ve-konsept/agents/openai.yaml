@@ -1,0 +1,3 @@
+display_name: İnşaat Tasarım ve Konsept
+short_description: Arsa, mahal programı ve hedeflerden konsept alternatifleri, kütle kararları, performans notları ve araç rotası üretir.
+default_prompt: Proje tipini, arsa/veri bilgilerini, mahal programını ve tasarım hedeflerini ver; konsept alternatifleri, karar matrisi ve sonraki araç rotasını çıkarayım.

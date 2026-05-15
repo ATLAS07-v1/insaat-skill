@@ -1,0 +1,4 @@
+interface:
+  display_name: "İnşaat Araç Kullanımları"
+  short_description: "İnşaat dosyalarını araçlara yönlendirir"
+  default_prompt: "Use $insaat-arac-kullanimlari to inspect construction PDFs, spreadsheets, CAD/BIM files, images, and folders, then extract evidence-backed normalized data for the next construction skill."

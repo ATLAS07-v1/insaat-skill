@@ -1,0 +1,40 @@
+name: risk-guvenlik-ve-uygunluk-denetimi
+version: 0.1.0
+language: tr
+description: İnşaat risk, saha güvenliği, kanıt ve uygunluk denetimi için Hermes/Codex skill tanımı.
+entrypoint: SKILL.md
+tags:
+  - insaat
+  - risk
+  - isg
+  - saha-denetimi
+  - uygunluk
+  - kanit
+  - ifc
+  - ids
+  - bcf
+inputs:
+  - risk_register
+  - compliance_checklist
+  - evidence_register
+  - method_statement
+  - permit_to_work
+  - inspection_photos
+  - ifc_model
+  - ids_file
+outputs:
+  - risk_register_report
+  - compliance_audit_report
+  - nonconformance_action_plan
+  - bcf_issue_summary
+  - evidence_gap_matrix
+guardrails:
+  - Bu skill resmi İSG, hukuk veya yapı denetim onayı vermez.
+  - Kaynak güncelliği doğrulanmadan mevzuat uygunluğu kesin ifade edilmez.
+  - Kritik risklerde yetkili saha sorumlusu, İSG uzmanı veya ilgili mühendis onayı gerekir.
+  - Kanıt bulunmayan gereksinimler uygun kabul edilmez.
+tools:
+  check_tools: scripts/check_risk_compliance_tools.py
+  plan_route: scripts/plan_risk_compliance_route.py
+  score_risks: scripts/score_risk_register.py
+  audit_checklist: scripts/audit_compliance_checklist.py

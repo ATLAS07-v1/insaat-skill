@@ -1,0 +1,3 @@
+display_name: Teknik Şartname ve Uygulama Kontrolü
+short_description: Teknik şartname maddelerini kontrol listesine çevirir, uygulama kanıtlarıyla eşleştirir ve uygunsuzluk/eksik kanıt raporu üretir.
+default_prompt: Teknik şartname, uygulama metodu, test raporu veya saha kanıtlarını paylaş; madde bazlı kontrol listesi, gerekli kanıtlar, uygunsuzluklar ve onay gerektiren noktaları çıkarayım.

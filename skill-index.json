@@ -1,0 +1,25 @@
+{
+  "name": "insaat-skill-seti",
+  "version": "0.1.0",
+  "language": "tr",
+  "description": "Hermes/Codex benzeri agent'ler için inşaat operasyonlarına özel tekrar kullanılabilir yetenek skill seti.",
+  "skills": [
+    "insaat-arac-kullanimlari",
+    "cad-autocad-dwg-dxf-isleme",
+    "bim-revit-ifc-model-kontrolu",
+    "blender-3d-modelleme-ve-render",
+    "sketchup-konsept-ve-kutle-modelleme",
+    "cizim-dosya-donusum-ve-qa",
+    "insaat-hesaplamalar",
+    "metraj-ve-mahal-kontrolu",
+    "teknik-sartname-ve-uygulama-kontrolu",
+    "insaat-tasarim-ve-konsept",
+    "teklif-ve-maliyet-tablolama",
+    "hakedis-ve-mutabakat-kontrolu",
+    "tedarik-ve-malzeme-karsilastirma",
+    "risk-guvenlik-ve-uygunluk-denetimi",
+    "musteri-ve-taseron-iletisim-hazirlayici",
+    "saha-fotograf-ve-kanit-analizi",
+    "dokuman-standartlastirma-ve-formatlama"
+  ]
+}

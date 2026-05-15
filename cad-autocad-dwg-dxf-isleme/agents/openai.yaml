@@ -1,0 +1,4 @@
+interface:
+  display_name: "CAD DWG/DXF İşleme"
+  short_description: "AutoCAD çizimlerini açık kaynak araçlarla inceler"
+  default_prompt: "Use $cad-autocad-dwg-dxf-isleme to inspect DWG/DXF drawings, choose an open-source conversion route, extract CAD layer/block/entity evidence, and produce a QA/markup report."

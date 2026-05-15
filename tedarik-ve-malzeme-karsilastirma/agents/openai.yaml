@@ -1,0 +1,3 @@
+display_name: Tedarik ve Malzeme Karşılaştırma
+short_description: Tedarikçi tekliflerini ve malzeme teknik uygunluğunu fiyat, termin, stok, sertifika ve risklerle karşılaştırır.
+default_prompt: Malzeme ihtiyacını, şartname kriterlerini ve tedarikçi tekliflerini ver; teknik uygunluk, fiyat/termin/stok karşılaştırması, riskler ve önerilen aksiyonları çıkarayım.

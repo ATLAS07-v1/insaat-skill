@@ -1,0 +1,4 @@
+interface:
+  display_name: "BIM Revit IFC Model Kontrolü"
+  short_description: "Revit/IFC modellerinden BIM QA verisi çıkarır"
+  default_prompt: "Use $bim-revit-ifc-model-kontrolu to inspect Revit-exported IFC/BIM models, extract hierarchy, elements, spaces, properties, quantities, and produce an evidence-backed BIM QA report."

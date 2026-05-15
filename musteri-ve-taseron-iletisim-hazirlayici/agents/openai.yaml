@@ -1,0 +1,42 @@
+name: musteri-ve-taseron-iletisim-hazirlayici
+version: 0.1.0
+language: tr
+description: İnşaat projelerinde müşteri ve taşeron iletişim taslakları, RFI, submittal, toplantı tutanağı ve aksiyon takip paketleri hazırlayan Hermes/Codex skill tanımı.
+entrypoint: SKILL.md
+tags:
+  - insaat
+  - musteri-iletisimi
+  - taseron
+  - rfi
+  - submittal
+  - transmittal
+  - toplanti-tutanagi
+  - aksiyon-takip
+  - crm
+inputs:
+  - project_context
+  - recipient
+  - communication_type
+  - facts
+  - references
+  - attachments
+  - due_date
+  - tone
+outputs:
+  - email_draft
+  - short_message_draft
+  - meeting_minutes
+  - action_list
+  - rfi_draft
+  - submittal_transmittal_note
+  - communication_risk_check
+guardrails:
+  - Bu skill üçüncü tarafla iletişime geçmez ve mesaj göndermez.
+  - Sözleşmesel, hukuki, finansal veya bağlayıcı ifadeler yetkili onay gerektirir.
+  - Doğrulanmamış iddialar gerçek gibi yazılmaz.
+  - Kusur kabulü, ceza, fesih, ödeme taahhüdü veya teslim garantisi içeren ifadeler bayraklanır.
+tools:
+  check_tools: scripts/check_communication_tools.py
+  plan_route: scripts/plan_communication_route.py
+  draft_message: scripts/draft_construction_message.py
+  validate_pack: scripts/validate_communication_pack.py

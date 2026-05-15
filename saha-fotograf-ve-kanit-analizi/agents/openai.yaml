@@ -1,0 +1,41 @@
+name: saha-fotograf-ve-kanit-analizi
+version: 0.1.0
+language: tr
+description: İnşaat saha fotoğrafları ve görsel kanıtlar için metadata, hash, OCR, görsel bulgu, mahal eşleştirme ve kanıt register analizi yapan Hermes/Codex skill tanımı.
+entrypoint: SKILL.md
+tags:
+  - insaat
+  - saha-fotografi
+  - kanit
+  - exif
+  - ocr
+  - kalite-kontrol
+  - isg
+  - ilerleme
+  - drone
+  - gis
+inputs:
+  - photo_folder
+  - image_files
+  - project_context
+  - evidence_register
+  - exif_metadata
+  - ocr_text
+  - annotations
+outputs:
+  - photo_evidence_register
+  - metadata_integrity_report
+  - visual_findings_report
+  - duplicate_photo_report
+  - privacy_review_flags
+  - action_followup_list
+guardrails:
+  - Fotoğraftan kesin hukuki delil geçerliliği veya kusur kararı verilmez.
+  - Kişi/yüz/plaka/GPS/hassas alan içeren görseller gizlilik kontrolü gerektirir.
+  - OCR ve görsel bulgular kritik kararlarda manuel doğrulanmalıdır.
+  - Orijinal dosyalar korunmalı, hash ve kaynak yolu kayıtlanmalıdır.
+tools:
+  check_tools: scripts/check_photo_evidence_tools.py
+  plan_route: scripts/plan_photo_evidence_route.py
+  build_register: scripts/build_photo_evidence_register.py
+  validate_register: scripts/validate_photo_evidence_register.py
