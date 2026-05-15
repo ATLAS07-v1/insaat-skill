@@ -21,6 +21,9 @@ REQUIRED_MANIFEST_FIELDS = {
     "description",
     "entrypoint",
     "default_prompt",
+    "python_requires",
+    "dependency_groups",
+    "system_tools",
     "tags",
     "triggers",
     "inputs",
@@ -96,11 +99,14 @@ def validate_manifest(skill_name: str, manifest: dict[str, Any], all_skill_names
         return
     if manifest.get("name") != skill_name:
         issue(issues, skill_name, "name_mismatch", f"Manifest name {manifest.get('name')!r}, klasör adı {skill_name!r}.")
+    if not str(manifest.get("python_requires", "")).startswith(">="):
+        issue(issues, skill_name, "invalid_python_requires", "python_requires >=x.y biçiminde olmalıdır.")
     entrypoint = ROOT / skill_name / str(manifest.get("entrypoint", ""))
     if not entrypoint.exists():
         issue(issues, skill_name, "missing_entrypoint", f"Entrypoint yok: {manifest.get('entrypoint')}")
-    for field in ("tags", "triggers", "inputs", "outputs", "guardrails", "human_approval_contexts"):
+    for field in ("dependency_groups", "tags", "triggers", "inputs", "outputs", "guardrails", "human_approval_contexts"):
         check_list(manifest.get(field), skill_name, field, issues)
+    check_list(manifest.get("system_tools"), skill_name, "system_tools", issues, min_len=0)
     if manifest.get("risk_level") not in RISK_LEVELS:
         issue(issues, skill_name, "invalid_risk_level", "risk_level low, medium veya high olmalıdır.")
     if not isinstance(manifest.get("requires_human_approval"), bool):
@@ -151,7 +157,20 @@ def validate_index(index: dict[str, Any], manifests: dict[str, dict[str, Any]], 
             issue(issues, "skill-index.json", "missing_skill_name", "Skill item name içermiyor.")
             continue
         manifest = manifests.get(name, {})
-        for field in ("version", "description", "tags", "triggers", "inputs", "outputs", "tools", "risk_level", "requires_human_approval"):
+        for field in (
+            "version",
+            "description",
+            "python_requires",
+            "dependency_groups",
+            "system_tools",
+            "tags",
+            "triggers",
+            "inputs",
+            "outputs",
+            "tools",
+            "risk_level",
+            "requires_human_approval",
+        ):
             if item.get(field) != manifest.get(field):
                 issue(issues, name, "index_manifest_field_mismatch", f"Index ve manifest alanı farklı: {field}")
         for path_field in ("path", "manifest", "entrypoint"):

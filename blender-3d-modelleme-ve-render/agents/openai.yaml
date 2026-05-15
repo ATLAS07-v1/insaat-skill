@@ -8,6 +8,11 @@ description: İnşaat, mimari, iç mekan, cephe, şantiye ve BIM/IFC bağlamınd
 entrypoint: SKILL.md
 default_prompt: Blender 3D Modelleme ve Render skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
   araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+system_tools:
+- Blender
 tags:
 - blender
 - 3d

@@ -8,6 +8,11 @@ description: İnşaat, mimari, kaba yapı, ince işler, metraj, malzeme, alan, h
 entrypoint: SKILL.md
 default_prompt: İnşaat Hesaplamalar skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç rotasını
   seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- spreadsheet
+system_tools: []
 tags:
 - hesaplama
 - metraj

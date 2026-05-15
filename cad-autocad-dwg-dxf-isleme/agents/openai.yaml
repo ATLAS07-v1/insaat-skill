@@ -9,6 +9,15 @@ description: AutoCAD kaynaklı DWG/DXF çizimlerini açık kaynak araçlarla gü
 entrypoint: SKILL.md
 default_prompt: CAD AutoCAD DWG/DXF İşleme skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
   rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- cad
+- pdf-doc
+system_tools:
+- ODA File Converter
+- LibreDWG
+- QCAD or LibreCAD
 tags:
 - cad
 - autocad

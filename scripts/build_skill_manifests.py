@@ -17,6 +17,7 @@ VERSION = "0.1.0"
 SCHEMA_VERSION = "1.0.0"
 LANGUAGE = "tr"
 REPOSITORY = "https://github.com/ATLAS07-v1/insaat-skill"
+PYTHON_REQUIRES = ">=3.10"
 
 
 ORDER = [
@@ -217,6 +218,48 @@ META: dict[str, dict[str, Any]] = {
 }
 
 
+DEPENDENCY_GROUPS = {
+    "insaat-arac-kullanimlari": ["core", "pdf-doc", "spreadsheet"],
+    "cad-autocad-dwg-dxf-isleme": ["core", "cad", "pdf-doc"],
+    "bim-revit-ifc-model-kontrolu": ["core", "bim", "data-quality"],
+    "blender-3d-modelleme-ve-render": ["core"],
+    "sketchup-konsept-ve-kutle-modelleme": ["core"],
+    "cizim-dosya-donusum-ve-qa": ["core", "cad", "bim", "pdf-doc", "data-quality"],
+    "insaat-hesaplamalar": ["core", "spreadsheet"],
+    "metraj-ve-mahal-kontrolu": ["core", "bim", "spreadsheet", "data-quality"],
+    "teknik-sartname-ve-uygulama-kontrolu": ["core", "pdf-doc", "bim", "data-quality"],
+    "insaat-tasarim-ve-konsept": ["core", "spreadsheet"],
+    "teklif-ve-maliyet-tablolama": ["core", "spreadsheet", "data-quality"],
+    "hakedis-ve-mutabakat-kontrolu": ["core", "spreadsheet", "data-quality", "bim"],
+    "tedarik-ve-malzeme-karsilastirma": ["core", "spreadsheet", "data-quality", "communication"],
+    "risk-guvenlik-ve-uygunluk-denetimi": ["core", "spreadsheet", "data-quality", "pdf-doc", "bim", "communication"],
+    "musteri-ve-taseron-iletisim-hazirlayici": ["core", "communication", "pdf-doc", "spreadsheet"],
+    "saha-fotograf-ve-kanit-analizi": ["core", "image-ocr", "spreadsheet"],
+    "dokuman-standartlastirma-ve-formatlama": ["core", "pdf-doc", "spreadsheet", "communication"],
+}
+
+
+SYSTEM_TOOLS = {
+    "insaat-arac-kullanimlari": ["Pandoc", "LibreOffice"],
+    "cad-autocad-dwg-dxf-isleme": ["ODA File Converter", "LibreDWG", "QCAD or LibreCAD"],
+    "bim-revit-ifc-model-kontrolu": ["IfcConvert", "IfcTester CLI", "BlenderBIM"],
+    "blender-3d-modelleme-ve-render": ["Blender"],
+    "sketchup-konsept-ve-kutle-modelleme": ["SketchUp"],
+    "cizim-dosya-donusum-ve-qa": ["Pandoc", "LibreOffice", "qpdf", "IfcConvert", "ODA File Converter"],
+    "insaat-hesaplamalar": [],
+    "metraj-ve-mahal-kontrolu": ["IfcConvert"],
+    "teknik-sartname-ve-uygulama-kontrolu": ["Pandoc", "LibreOffice", "IfcTester CLI"],
+    "insaat-tasarim-ve-konsept": [],
+    "teklif-ve-maliyet-tablolama": ["LibreOffice"],
+    "hakedis-ve-mutabakat-kontrolu": ["LibreOffice"],
+    "tedarik-ve-malzeme-karsilastirma": ["OpenRefine", "LibreOffice"],
+    "risk-guvenlik-ve-uygunluk-denetimi": ["IfcTester CLI", "OpenSCAP", "LibreOffice"],
+    "musteri-ve-taseron-iletisim-hazirlayici": ["Pandoc", "LibreOffice"],
+    "saha-fotograf-ve-kanit-analizi": ["ExifTool", "Tesseract OCR", "ImageMagick", "FFmpeg", "QGIS", "Docker"],
+    "dokuman-standartlastirma-ve-formatlama": ["Pandoc", "LibreOffice", "qpdf", "Java", "Node.js"],
+}
+
+
 APPROVAL_CONTEXTS = {
     "high": [
         "teknik, mali, hukuki, İSG veya sözleşmesel nihai karar",
@@ -306,6 +349,9 @@ def build_skill_manifest(name: str) -> dict[str, Any]:
         "description": frontmatter["description"],
         "entrypoint": "SKILL.md",
         "default_prompt": f"{display_name(name)} skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.",
+        "python_requires": PYTHON_REQUIRES,
+        "dependency_groups": DEPENDENCY_GROUPS[name],
+        "system_tools": SYSTEM_TOOLS[name],
         "tags": meta["tags"],
         "triggers": meta["triggers"],
         "inputs": meta["inputs"],
@@ -344,6 +390,9 @@ def build_index(manifests: list[dict[str, Any]]) -> dict[str, Any]:
                 "entrypoint": f"{manifest['name']}/SKILL.md",
                 "display_name": manifest["display_name"],
                 "description": manifest["description"],
+                "python_requires": manifest["python_requires"],
+                "dependency_groups": manifest["dependency_groups"],
+                "system_tools": manifest["system_tools"],
                 "tags": manifest["tags"],
                 "triggers": manifest["triggers"],
                 "inputs": manifest["inputs"],

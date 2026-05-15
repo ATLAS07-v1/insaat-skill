@@ -8,6 +8,15 @@ description: İnşaat tedarik, RFQ, tedarikçi teklif karşılaştırma, malzeme
 entrypoint: SKILL.md
 default_prompt: Tedarik ve Malzeme Karşılaştırma skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
   araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- spreadsheet
+- data-quality
+- communication
+system_tools:
+- OpenRefine
+- LibreOffice
 tags:
 - tedarik
 - malzeme

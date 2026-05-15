@@ -9,6 +9,18 @@ description: İnşaat proje dokümanları için DOCX, PDF, Markdown, XLSX, ODT, 
 entrypoint: SKILL.md
 default_prompt: Doküman Standartlaştırma ve Formatlama skillini kullanarak kullanıcının inşaat operasyonu talebini analiz
   et, uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- pdf-doc
+- spreadsheet
+- communication
+system_tools:
+- Pandoc
+- LibreOffice
+- qpdf
+- Java
+- Node.js
 tags:
 - dokuman
 - formatlama

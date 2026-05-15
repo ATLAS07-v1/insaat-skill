@@ -35,6 +35,36 @@ Her klasör bağımsız bir skill olarak düzenlenmiştir:
 
 Skill'i kullanacak agent ilgili klasörü kendi skill dizinine kopyalayabilir veya doğrudan bu repo içindeki `SKILL.md` dosyasını entrypoint olarak okuyabilir.
 
+## Kurulum
+
+Python 3.10 veya üstü önerilir.
+
+PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Bash:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Domain bağımlılıklarının tamamını kurmak için:
+
+```bash
+pip install -e ".[cad,bim,pdf-doc,spreadsheet,image-ocr,data-quality,communication]"
+```
+
+Bağımlılık grupları ve sistem araçları için [DEPENDENCIES.md](DEPENDENCIES.md) dosyasına bakın.
+
 ## Manifest ve Doğrulama
 
 Kök `skill-index.json` dosyası tüm skill'lerin makine-okunur index'idir. Her skill içinde aynı şemayı kullanan `agents/openai.yaml` manifesti bulunur.

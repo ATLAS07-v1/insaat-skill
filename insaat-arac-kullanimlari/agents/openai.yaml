@@ -8,6 +8,14 @@ description: İnşaat operasyonunda PDF, Excel, CSV, CAD/DWG/DXF, IFC/BIM, görs
 entrypoint: SKILL.md
 default_prompt: İnşaat Araç Kullanımları skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
   rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- pdf-doc
+- spreadsheet
+system_tools:
+- Pandoc
+- LibreOffice
 tags:
 - insaat
 - arac-secimi

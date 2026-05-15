@@ -9,6 +9,19 @@ description: İnşaat, mimari, BIM, CAD, PDF, görsel ve 3D model dosyalarında 
 entrypoint: SKILL.md
 default_prompt: Çizim Dosya Dönüşüm ve QA skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
   rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- cad
+- bim
+- pdf-doc
+- data-quality
+system_tools:
+- Pandoc
+- LibreOffice
+- qpdf
+- IfcConvert
+- ODA File Converter
 tags:
 - dosya-donusum
 - pdf

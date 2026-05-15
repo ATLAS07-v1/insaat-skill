@@ -1,0 +1,15 @@
+# Core runtime dependencies for the construction AI skill set.
+# Python: >=3.10
+#
+# This file installs the lightweight baseline needed by repository-level
+# manifest tooling and the most common data/document helpers.
+# For domain-specific extras, prefer:
+#   pip install -e ".[cad,bim,pdf-doc,spreadsheet,image-ocr,data-quality,communication]"
+
+PyYAML>=6.0.2
+Pillow>=10.4.0
+pypdf>=4.3.0
+pandas>=2.2.0
+XlsxWriter>=3.2.0
+requests>=2.32.0
+beautifulsoup4>=4.12.0

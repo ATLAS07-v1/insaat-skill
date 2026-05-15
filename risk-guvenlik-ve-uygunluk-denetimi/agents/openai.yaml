@@ -8,6 +8,18 @@ description: İnşaat risk kaydı, İSG saha denetimi, çalışma izni, uygunsuz
 entrypoint: SKILL.md
 default_prompt: Risk Güvenlik ve Uygunluk Denetimi skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
   uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- spreadsheet
+- data-quality
+- pdf-doc
+- bim
+- communication
+system_tools:
+- IfcTester CLI
+- OpenSCAP
+- LibreOffice
 tags:
 - risk
 - isg

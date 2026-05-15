@@ -8,6 +8,18 @@ description: İnşaat saha fotoğrafları, video kareleri ve görsel kanıtlar i
 entrypoint: SKILL.md
 default_prompt: Saha Fotoğraf ve Kanıt Analizi skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
   araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- image-ocr
+- spreadsheet
+system_tools:
+- ExifTool
+- Tesseract OCR
+- ImageMagick
+- FFmpeg
+- QGIS
+- Docker
 tags:
 - saha-fotografi
 - kanit

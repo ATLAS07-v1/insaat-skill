@@ -8,6 +8,11 @@ description: İnşaat, mimari, iç mekan, arsa, cephe ve şantiye bağlamında S
 entrypoint: SKILL.md
 default_prompt: SketchUp Konsept ve Kütle Modelleme skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
   uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+system_tools:
+- SketchUp
 tags:
 - sketchup
 - konsept

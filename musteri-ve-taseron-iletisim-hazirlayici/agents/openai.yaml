@@ -9,6 +9,15 @@ description: İnşaat projelerinde müşteri, işveren, taşeron, tedarikçi ve 
 entrypoint: SKILL.md
 default_prompt: Müşteri ve Taşeron İletişim Hazırlayıcı skillini kullanarak kullanıcının inşaat operasyonu talebini analiz
   et, uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- communication
+- pdf-doc
+- spreadsheet
+system_tools:
+- Pandoc
+- LibreOffice
 tags:
 - iletisim
 - musteri

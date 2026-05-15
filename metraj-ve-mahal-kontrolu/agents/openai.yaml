@@ -8,6 +8,14 @@ description: İnşaat, mimari, BIM, CAD, PDF ve tablo kaynaklarından mahal list
 entrypoint: SKILL.md
 default_prompt: Metraj ve Mahal Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
   rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- bim
+- spreadsheet
+- data-quality
+system_tools:
+- IfcConvert
 tags:
 - metraj
 - mahal

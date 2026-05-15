@@ -90,6 +90,9 @@
         "entrypoint",
         "display_name",
         "description",
+        "python_requires",
+        "dependency_groups",
+        "system_tools",
         "tags",
         "triggers",
         "inputs",
@@ -120,6 +123,15 @@
         },
         "description": {
           "type": "string"
+        },
+        "python_requires": {
+          "type": "string"
+        },
+        "dependency_groups": {
+          "$ref": "#/$defs/string_list"
+        },
+        "system_tools": {
+          "$ref": "#/$defs/string_list"
         },
         "tags": {
           "$ref": "#/$defs/string_list"
@@ -167,6 +179,9 @@
         "description",
         "entrypoint",
         "default_prompt",
+        "python_requires",
+        "dependency_groups",
+        "system_tools",
         "tags",
         "triggers",
         "inputs",
@@ -202,6 +217,15 @@
         },
         "default_prompt": {
           "type": "string"
+        },
+        "python_requires": {
+          "type": "string"
+        },
+        "dependency_groups": {
+          "$ref": "#/$defs/string_list"
+        },
+        "system_tools": {
+          "$ref": "#/$defs/string_list"
         },
         "tags": {
           "$ref": "#/$defs/string_list"

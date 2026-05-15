@@ -8,6 +8,13 @@ description: İnşaat teklif, yaklaşık maliyet, BOQ, metraj-maliyet eşleştir
 entrypoint: SKILL.md
 default_prompt: Teklif ve Maliyet Tablolama skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
   rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- spreadsheet
+- data-quality
+system_tools:
+- LibreOffice
 tags:
 - teklif
 - maliyet

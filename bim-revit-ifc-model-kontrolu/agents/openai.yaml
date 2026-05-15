@@ -9,6 +9,15 @@ description: Revit/IFC/BIM modellerini açık kaynak araçlarla güvenli incelem
 entrypoint: SKILL.md
 default_prompt: BIM Revit IFC Model Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
   araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- bim
+- data-quality
+system_tools:
+- IfcConvert
+- IfcTester CLI
+- BlenderBIM
 tags:
 - bim
 - revit

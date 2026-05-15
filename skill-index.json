@@ -16,6 +16,16 @@
       "entrypoint": "insaat-arac-kullanimlari/SKILL.md",
       "display_name": "İnşaat Araç Kullanımları",
       "description": "İnşaat operasyonunda PDF, Excel, CSV, CAD/DWG/DXF, IFC/BIM, görsel, klasör ve arşiv girdilerini incelemek, doğru açık kaynak araca yönlendirmek, kanıtlı veri çıkarmak ve sonraki inşaat skill'lerine temiz veri hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "pdf-doc",
+        "spreadsheet"
+      ],
+      "system_tools": [
+        "Pandoc",
+        "LibreOffice"
+      ],
       "tags": [
         "insaat",
         "arac-secimi",
@@ -81,6 +91,17 @@
       "entrypoint": "cad-autocad-dwg-dxf-isleme/SKILL.md",
       "display_name": "CAD AutoCAD DWG/DXF İşleme",
       "description": "AutoCAD kaynaklı DWG/DXF çizimlerini açık kaynak araçlarla güvenli incelemek, DWG'yi DXF'e dönüştürme rotası seçmek, DXF layer/block/entity/ölçü/mahal/ölçek kontrolü yapmak, çizim QA raporu ve revizyon-markup listesi üretmek için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "cad",
+        "pdf-doc"
+      ],
+      "system_tools": [
+        "ODA File Converter",
+        "LibreDWG",
+        "QCAD or LibreCAD"
+      ],
       "tags": [
         "cad",
         "autocad",
@@ -144,6 +165,17 @@
       "entrypoint": "bim-revit-ifc-model-kontrolu/SKILL.md",
       "display_name": "BIM Revit IFC Model Kontrolü",
       "description": "Revit/IFC/BIM modellerini açık kaynak araçlarla güvenli incelemek, Revit'ten IFC export rotası planlamak, IFC modelinden proje/kat/mahal/eleman/tip/quantity/property verisi çıkarmak, BIM QA raporu ve eksik parametre listesi üretmek için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "bim",
+        "data-quality"
+      ],
+      "system_tools": [
+        "IfcConvert",
+        "IfcTester CLI",
+        "BlenderBIM"
+      ],
       "tags": [
         "bim",
         "revit",
@@ -207,6 +239,13 @@
       "entrypoint": "blender-3d-modelleme-ve-render/SKILL.md",
       "display_name": "Blender 3D Modelleme ve Render",
       "description": "İnşaat, mimari, iç mekan, cephe, şantiye ve BIM/IFC bağlamında Blender ile ölçülü 3D kütle model, konsept sahne, uygulama detayı, malzeme/ışık/kamera kurulumu, render/export ve kalite kontrol çıktıları üretmek için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core"
+      ],
+      "system_tools": [
+        "Blender"
+      ],
       "tags": [
         "blender",
         "3d",
@@ -269,6 +308,13 @@
       "entrypoint": "sketchup-konsept-ve-kutle-modelleme/SKILL.md",
       "display_name": "SketchUp Konsept ve Kütle Modelleme",
       "description": "İnşaat, mimari, iç mekan, arsa, cephe ve şantiye bağlamında SketchUp ile hızlı konsept, kütle model, yerleşim, sahne/görünüş listesi, Ruby API otomasyonu, SKP/export planı ve model kalite kontrolü hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core"
+      ],
+      "system_tools": [
+        "SketchUp"
+      ],
       "tags": [
         "sketchup",
         "konsept",
@@ -330,6 +376,21 @@
       "entrypoint": "cizim-dosya-donusum-ve-qa/SKILL.md",
       "display_name": "Çizim Dosya Dönüşüm ve QA",
       "description": "İnşaat, mimari, BIM, CAD, PDF, görsel ve 3D model dosyalarında DWG, DXF, PDF, IFC, RVT, SKP, OBJ, FBX, GLB, STL, STEP, IGES, SVG, PNG ve benzeri formatlar arası dönüşüm rotası, açık kaynak araç seçimi, dosya manifesti ve kalite kontrol raporu hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "cad",
+        "bim",
+        "pdf-doc",
+        "data-quality"
+      ],
+      "system_tools": [
+        "Pandoc",
+        "LibreOffice",
+        "qpdf",
+        "IfcConvert",
+        "ODA File Converter"
+      ],
       "tags": [
         "dosya-donusum",
         "pdf",
@@ -392,6 +453,12 @@
       "entrypoint": "insaat-hesaplamalar/SKILL.md",
       "display_name": "İnşaat Hesaplamalar",
       "description": "İnşaat, mimari, kaba yapı, ince işler, metraj, malzeme, alan, hacim, kazı-dolgu, beton, kalıp, donatı, birim dönüşümü, ön taşıyıcı sistem hesabı ve hesap kontrol raporu hazırlamak için kullanılır; mühendislik onayı yerine geçmez.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet"
+      ],
+      "system_tools": [],
       "tags": [
         "hesaplama",
         "metraj",
@@ -454,6 +521,16 @@
       "entrypoint": "metraj-ve-mahal-kontrolu/SKILL.md",
       "display_name": "Metraj ve Mahal Kontrolü",
       "description": "İnşaat, mimari, BIM, CAD, PDF ve tablo kaynaklarından mahal listesi, room/space schedule, metraj, alan, hacim, adet, quantity takeoff, mahal kodu, kat, net/brüt alan ve kaynaklar arası sapma kontrolü yapmak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "bim",
+        "spreadsheet",
+        "data-quality"
+      ],
+      "system_tools": [
+        "IfcConvert"
+      ],
       "tags": [
         "metraj",
         "mahal",
@@ -521,6 +598,18 @@
       "entrypoint": "teknik-sartname-ve-uygulama-kontrolu/SKILL.md",
       "display_name": "Teknik Şartname ve Uygulama Kontrolü",
       "description": "İnşaat teknik şartname, uygulama kriteri, malzeme onayı, test raporu, tolerans, saha kanıtı ve BIM/IDS/BCF uygunsuzluk kontrolü yapmak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "pdf-doc",
+        "bim",
+        "data-quality"
+      ],
+      "system_tools": [
+        "Pandoc",
+        "LibreOffice",
+        "IfcTester CLI"
+      ],
       "tags": [
         "teknik-sartname",
         "uygulama-kontrol",
@@ -589,6 +678,12 @@
       "entrypoint": "insaat-tasarim-ve-konsept/SKILL.md",
       "display_name": "İnşaat Tasarım ve Konsept",
       "description": "İnşaat, mimari, arsa, yerleşim, kütle, mahal programı, konsept alternatifleri, erken sürdürülebilirlik, tasarım brief'i, sunum taslağı ve açık kaynak tasarım araç rotası üretmek için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet"
+      ],
+      "system_tools": [],
       "tags": [
         "tasarim",
         "konsept",
@@ -657,6 +752,15 @@
       "entrypoint": "teklif-ve-maliyet-tablolama/SKILL.md",
       "display_name": "Teklif ve Maliyet Tablolama",
       "description": "İnşaat teklif, yaklaşık maliyet, BOQ, metraj-maliyet eşleştirme, birim fiyat, taşeron teklifi karşılaştırma, markup, KDV, risk payı, nakit akışı ve maliyet tablosu QA hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet",
+        "data-quality"
+      ],
+      "system_tools": [
+        "LibreOffice"
+      ],
       "tags": [
         "teklif",
         "maliyet",
@@ -726,6 +830,16 @@
       "entrypoint": "hakedis-ve-mutabakat-kontrolu/SKILL.md",
       "display_name": "Hakediş ve Mutabakat Kontrolü",
       "description": "İnşaat hakediş, ara ödeme, kesin hesap, metraj-mutabakat, fatura-ödeme eşleştirme, taşeron hakedişi, avans, teminat, kesinti, KDV, sözleşme kalemi ve ödeme farkı kontrolü yapmak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet",
+        "data-quality",
+        "bim"
+      ],
+      "system_tools": [
+        "LibreOffice"
+      ],
       "tags": [
         "hakedis",
         "mutabakat",
@@ -794,6 +908,17 @@
       "entrypoint": "tedarik-ve-malzeme-karsilastirma/SKILL.md",
       "display_name": "Tedarik ve Malzeme Karşılaştırma",
       "description": "İnşaat tedarik, RFQ, tedarikçi teklif karşılaştırma, malzeme teknik uygunluk, datasheet/sertifika/numune kontrolü, fiyat-termin-stok-risk analizi ve satın alma karar tablosu hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet",
+        "data-quality",
+        "communication"
+      ],
+      "system_tools": [
+        "OpenRefine",
+        "LibreOffice"
+      ],
       "tags": [
         "tedarik",
         "malzeme",
@@ -861,6 +986,20 @@
       "entrypoint": "risk-guvenlik-ve-uygunluk-denetimi/SKILL.md",
       "display_name": "Risk Güvenlik ve Uygunluk Denetimi",
       "description": "İnşaat risk kaydı, İSG saha denetimi, çalışma izni, uygunsuzluk, kanıt/evidence kontrolü, BIM/IFC IDS uyumluluk denetimi, BCF issue ve kapatma aksiyonu hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "spreadsheet",
+        "data-quality",
+        "pdf-doc",
+        "bim",
+        "communication"
+      ],
+      "system_tools": [
+        "IfcTester CLI",
+        "OpenSCAP",
+        "LibreOffice"
+      ],
       "tags": [
         "risk",
         "isg",
@@ -929,6 +1068,17 @@
       "entrypoint": "musteri-ve-taseron-iletisim-hazirlayici/SKILL.md",
       "display_name": "Müşteri ve Taşeron İletişim Hazırlayıcı",
       "description": "İnşaat projelerinde müşteri, işveren, taşeron, tedarikçi ve proje ekibi için RFI, submittal, transmittal, toplantı tutanağı, saha talimatı, aksiyon takibi, durum güncellemesi, gecikme/variasyon taslağı ve resmi olmayan iletişim paketleri hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "communication",
+        "pdf-doc",
+        "spreadsheet"
+      ],
+      "system_tools": [
+        "Pandoc",
+        "LibreOffice"
+      ],
       "tags": [
         "iletisim",
         "musteri",
@@ -999,6 +1149,20 @@
       "entrypoint": "saha-fotograf-ve-kanit-analizi/SKILL.md",
       "display_name": "Saha Fotoğraf ve Kanıt Analizi",
       "description": "İnşaat saha fotoğrafları, video kareleri ve görsel kanıtlar için EXIF/metadata, hash, OCR, mahal/konum, ilerleme, kalite, İSG, uygunsuzluk, önce-sonra karşılaştırma, drone görselleri ve kanıt register analizi hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "image-ocr",
+        "spreadsheet"
+      ],
+      "system_tools": [
+        "ExifTool",
+        "Tesseract OCR",
+        "ImageMagick",
+        "FFmpeg",
+        "QGIS",
+        "Docker"
+      ],
       "tags": [
         "saha-fotografi",
         "kanit",
@@ -1068,6 +1232,20 @@
       "entrypoint": "dokuman-standartlastirma-ve-formatlama/SKILL.md",
       "display_name": "Doküman Standartlaştırma ve Formatlama",
       "description": "İnşaat proje dokümanları için DOCX, PDF, Markdown, XLSX, ODT, teknik rapor, şartname, method statement, toplantı tutanağı, RFI/submittal/transmittal, kapak, revizyon, stil, numaralandırma, dosya adlandırma, dönüşüm ve QA format kontrolü hazırlamak için kullanılır.",
+      "python_requires": ">=3.10",
+      "dependency_groups": [
+        "core",
+        "pdf-doc",
+        "spreadsheet",
+        "communication"
+      ],
+      "system_tools": [
+        "Pandoc",
+        "LibreOffice",
+        "qpdf",
+        "Java",
+        "Node.js"
+      ],
       "tags": [
         "dokuman",
         "formatlama",

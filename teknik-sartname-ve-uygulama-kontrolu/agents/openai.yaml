@@ -8,6 +8,16 @@ description: İnşaat teknik şartname, uygulama kriteri, malzeme onayı, test r
 entrypoint: SKILL.md
 default_prompt: Teknik Şartname ve Uygulama Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
   uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+python_requires: '>=3.10'
+dependency_groups:
+- core
+- pdf-doc
+- bim
+- data-quality
+system_tools:
+- Pandoc
+- LibreOffice
+- IfcTester CLI
 tags:
 - teknik-sartname
 - uygulama-kontrol
