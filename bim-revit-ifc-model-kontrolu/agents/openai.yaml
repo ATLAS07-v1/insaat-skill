@@ -1,4 +1,62 @@
-interface:
-  display_name: "BIM Revit IFC Model Kontrolü"
-  short_description: "Revit/IFC modellerinden BIM QA verisi çıkarır"
-  default_prompt: "Use $bim-revit-ifc-model-kontrolu to inspect Revit-exported IFC/BIM models, extract hierarchy, elements, spaces, properties, quantities, and produce an evidence-backed BIM QA report."
+schema_version: 1.0.0
+name: bim-revit-ifc-model-kontrolu
+version: 0.1.0
+language: tr
+display_name: BIM Revit IFC Model Kontrolü
+description: Revit/IFC/BIM modellerini açık kaynak araçlarla güvenli incelemek, Revit'ten IFC export rotası planlamak, IFC
+  modelinden proje/kat/mahal/eleman/tip/quantity/property verisi çıkarmak, BIM QA raporu ve eksik parametre listesi üretmek
+  için kullanılır.
+entrypoint: SKILL.md
+default_prompt: BIM Revit IFC Model Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
+  araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- bim
+- revit
+- ifc
+- ids
+- bcf
+- model-qa
+triggers:
+- IFC model kontrolü
+- Revit export
+- BIM QA
+- IDS uygunluk
+- BCF issue
+inputs:
+- ifc_model
+- rvt_context
+- ids_file
+- bcf_issue
+- bim_requirements
+outputs:
+- bim_qa_report
+- ifc_element_summary
+- ids_check_plan
+- bcf_issue_summary
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: check_bim_tools
+  type: cli
+  path: scripts/check_bim_tools.py
+  command: python scripts/check_bim_tools.py
+- name: inspect_ifc_ifcopenshell
+  type: cli
+  path: scripts/inspect_ifc_ifcopenshell.py
+  command: python scripts/inspect_ifc_ifcopenshell.py
+- name: plan_revit_ifc_export
+  type: cli
+  path: scripts/plan_revit_ifc_export.py
+  command: python scripts/plan_revit_ifc_export.py
+related_skills:
+- metraj-ve-mahal-kontrolu
+- teknik-sartname-ve-uygulama-kontrolu

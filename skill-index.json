@@ -1,25 +1,1133 @@
 {
+  "schema_version": "1.0.0",
   "name": "insaat-skill-seti",
   "version": "0.1.0",
   "language": "tr",
   "description": "Hermes/Codex benzeri agent'ler için inşaat operasyonlarına özel tekrar kullanılabilir yetenek skill seti.",
+  "repository": "https://github.com/ATLAS07-v1/insaat-skill",
+  "generated_at": "2026-05-15T18:24:19.123674Z",
+  "skill_count": 17,
   "skills": [
-    "insaat-arac-kullanimlari",
-    "cad-autocad-dwg-dxf-isleme",
-    "bim-revit-ifc-model-kontrolu",
-    "blender-3d-modelleme-ve-render",
-    "sketchup-konsept-ve-kutle-modelleme",
-    "cizim-dosya-donusum-ve-qa",
-    "insaat-hesaplamalar",
-    "metraj-ve-mahal-kontrolu",
-    "teknik-sartname-ve-uygulama-kontrolu",
-    "insaat-tasarim-ve-konsept",
-    "teklif-ve-maliyet-tablolama",
-    "hakedis-ve-mutabakat-kontrolu",
-    "tedarik-ve-malzeme-karsilastirma",
-    "risk-guvenlik-ve-uygunluk-denetimi",
-    "musteri-ve-taseron-iletisim-hazirlayici",
-    "saha-fotograf-ve-kanit-analizi",
-    "dokuman-standartlastirma-ve-formatlama"
+    {
+      "name": "insaat-arac-kullanimlari",
+      "version": "0.1.0",
+      "path": "insaat-arac-kullanimlari",
+      "manifest": "insaat-arac-kullanimlari/agents/openai.yaml",
+      "entrypoint": "insaat-arac-kullanimlari/SKILL.md",
+      "display_name": "İnşaat Araç Kullanımları",
+      "description": "İnşaat operasyonunda PDF, Excel, CSV, CAD/DWG/DXF, IFC/BIM, görsel, klasör ve arşiv girdilerini incelemek, doğru açık kaynak araca yönlendirmek, kanıtlı veri çıkarmak ve sonraki inşaat skill'lerine temiz veri hazırlamak için kullanılır.",
+      "tags": [
+        "insaat",
+        "arac-secimi",
+        "dosya-inceleme",
+        "dokuman",
+        "tablo",
+        "rota-planlama"
+      ],
+      "triggers": [
+        "inşaat girdilerini incele",
+        "hangi araçla açılır",
+        "dosya envanteri",
+        "araç kullanım rotası"
+      ],
+      "inputs": [
+        "construction_files",
+        "pdf",
+        "docx",
+        "xlsx",
+        "csv",
+        "images",
+        "project_context"
+      ],
+      "outputs": [
+        "input_inventory",
+        "tool_route",
+        "document_skeleton",
+        "table_skeleton",
+        "qa_notes"
+      ],
+      "tools": [
+        {
+          "name": "extract_document_skeleton",
+          "type": "cli",
+          "path": "scripts/extract_document_skeleton.py",
+          "command": "python scripts/extract_document_skeleton.py"
+        },
+        {
+          "name": "extract_table_skeleton",
+          "type": "cli",
+          "path": "scripts/extract_table_skeleton.py",
+          "command": "python scripts/extract_table_skeleton.py"
+        },
+        {
+          "name": "inspect_construction_inputs",
+          "type": "cli",
+          "path": "scripts/inspect_construction_inputs.py",
+          "command": "python scripts/inspect_construction_inputs.py"
+        }
+      ],
+      "related_skills": [
+        "cizim-dosya-donusum-ve-qa",
+        "dokuman-standartlastirma-ve-formatlama"
+      ],
+      "risk_level": "medium",
+      "requires_human_approval": false
+    },
+    {
+      "name": "cad-autocad-dwg-dxf-isleme",
+      "version": "0.1.0",
+      "path": "cad-autocad-dwg-dxf-isleme",
+      "manifest": "cad-autocad-dwg-dxf-isleme/agents/openai.yaml",
+      "entrypoint": "cad-autocad-dwg-dxf-isleme/SKILL.md",
+      "display_name": "CAD AutoCAD DWG/DXF İşleme",
+      "description": "AutoCAD kaynaklı DWG/DXF çizimlerini açık kaynak araçlarla güvenli incelemek, DWG'yi DXF'e dönüştürme rotası seçmek, DXF layer/block/entity/ölçü/mahal/ölçek kontrolü yapmak, çizim QA raporu ve revizyon-markup listesi üretmek için kullanılır.",
+      "tags": [
+        "cad",
+        "autocad",
+        "dwg",
+        "dxf",
+        "layer",
+        "block",
+        "markup"
+      ],
+      "triggers": [
+        "DWG incele",
+        "DXF analiz et",
+        "CAD layer kontrolü",
+        "AutoCAD dönüşüm planı"
+      ],
+      "inputs": [
+        "dwg_file",
+        "dxf_file",
+        "pdf_markup",
+        "cad_standards",
+        "layer_list"
+      ],
+      "outputs": [
+        "cad_qa_report",
+        "dxf_entity_report",
+        "conversion_plan",
+        "markup_summary"
+      ],
+      "tools": [
+        {
+          "name": "check_cad_tools",
+          "type": "cli",
+          "path": "scripts/check_cad_tools.py",
+          "command": "python scripts/check_cad_tools.py"
+        },
+        {
+          "name": "inspect_dxf_ezdxf",
+          "type": "cli",
+          "path": "scripts/inspect_dxf_ezdxf.py",
+          "command": "python scripts/inspect_dxf_ezdxf.py"
+        },
+        {
+          "name": "plan_dwg_conversion",
+          "type": "cli",
+          "path": "scripts/plan_dwg_conversion.py",
+          "command": "python scripts/plan_dwg_conversion.py"
+        }
+      ],
+      "related_skills": [
+        "cizim-dosya-donusum-ve-qa",
+        "metraj-ve-mahal-kontrolu"
+      ],
+      "risk_level": "medium",
+      "requires_human_approval": true
+    },
+    {
+      "name": "bim-revit-ifc-model-kontrolu",
+      "version": "0.1.0",
+      "path": "bim-revit-ifc-model-kontrolu",
+      "manifest": "bim-revit-ifc-model-kontrolu/agents/openai.yaml",
+      "entrypoint": "bim-revit-ifc-model-kontrolu/SKILL.md",
+      "display_name": "BIM Revit IFC Model Kontrolü",
+      "description": "Revit/IFC/BIM modellerini açık kaynak araçlarla güvenli incelemek, Revit'ten IFC export rotası planlamak, IFC modelinden proje/kat/mahal/eleman/tip/quantity/property verisi çıkarmak, BIM QA raporu ve eksik parametre listesi üretmek için kullanılır.",
+      "tags": [
+        "bim",
+        "revit",
+        "ifc",
+        "ids",
+        "bcf",
+        "model-qa"
+      ],
+      "triggers": [
+        "IFC model kontrolü",
+        "Revit export",
+        "BIM QA",
+        "IDS uygunluk",
+        "BCF issue"
+      ],
+      "inputs": [
+        "ifc_model",
+        "rvt_context",
+        "ids_file",
+        "bcf_issue",
+        "bim_requirements"
+      ],
+      "outputs": [
+        "bim_qa_report",
+        "ifc_element_summary",
+        "ids_check_plan",
+        "bcf_issue_summary"
+      ],
+      "tools": [
+        {
+          "name": "check_bim_tools",
+          "type": "cli",
+          "path": "scripts/check_bim_tools.py",
+          "command": "python scripts/check_bim_tools.py"
+        },
+        {
+          "name": "inspect_ifc_ifcopenshell",
+          "type": "cli",
+          "path": "scripts/inspect_ifc_ifcopenshell.py",
+          "command": "python scripts/inspect_ifc_ifcopenshell.py"
+        },
+        {
+          "name": "plan_revit_ifc_export",
+          "type": "cli",
+          "path": "scripts/plan_revit_ifc_export.py",
+          "command": "python scripts/plan_revit_ifc_export.py"
+        }
+      ],
+      "related_skills": [
+        "metraj-ve-mahal-kontrolu",
+        "teknik-sartname-ve-uygulama-kontrolu"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "blender-3d-modelleme-ve-render",
+      "version": "0.1.0",
+      "path": "blender-3d-modelleme-ve-render",
+      "manifest": "blender-3d-modelleme-ve-render/agents/openai.yaml",
+      "entrypoint": "blender-3d-modelleme-ve-render/SKILL.md",
+      "display_name": "Blender 3D Modelleme ve Render",
+      "description": "İnşaat, mimari, iç mekan, cephe, şantiye ve BIM/IFC bağlamında Blender ile ölçülü 3D kütle model, konsept sahne, uygulama detayı, malzeme/ışık/kamera kurulumu, render/export ve kalite kontrol çıktıları üretmek için kullanılır.",
+      "tags": [
+        "blender",
+        "3d",
+        "render",
+        "python",
+        "modelleme",
+        "gorsellestirme"
+      ],
+      "triggers": [
+        "Blender sahnesi oluştur",
+        "3D render",
+        "kütle model",
+        "malzeme ışık kamera"
+      ],
+      "inputs": [
+        "scene_brief",
+        "model_reference",
+        "materials",
+        "camera_views",
+        "export_format"
+      ],
+      "outputs": [
+        "blender_script",
+        "scene_plan",
+        "render_plan",
+        "export_notes"
+      ],
+      "tools": [
+        {
+          "name": "check_blender_tools",
+          "type": "cli",
+          "path": "scripts/check_blender_tools.py",
+          "command": "python scripts/check_blender_tools.py"
+        },
+        {
+          "name": "create_construction_scene",
+          "type": "cli",
+          "path": "scripts/create_construction_scene.py",
+          "command": "python scripts/create_construction_scene.py"
+        },
+        {
+          "name": "plan_blender_job",
+          "type": "cli",
+          "path": "scripts/plan_blender_job.py",
+          "command": "python scripts/plan_blender_job.py"
+        }
+      ],
+      "related_skills": [
+        "insaat-tasarim-ve-konsept",
+        "sketchup-konsept-ve-kutle-modelleme"
+      ],
+      "risk_level": "low",
+      "requires_human_approval": false
+    },
+    {
+      "name": "sketchup-konsept-ve-kutle-modelleme",
+      "version": "0.1.0",
+      "path": "sketchup-konsept-ve-kutle-modelleme",
+      "manifest": "sketchup-konsept-ve-kutle-modelleme/agents/openai.yaml",
+      "entrypoint": "sketchup-konsept-ve-kutle-modelleme/SKILL.md",
+      "display_name": "SketchUp Konsept ve Kütle Modelleme",
+      "description": "İnşaat, mimari, iç mekan, arsa, cephe ve şantiye bağlamında SketchUp ile hızlı konsept, kütle model, yerleşim, sahne/görünüş listesi, Ruby API otomasyonu, SKP/export planı ve model kalite kontrolü hazırlamak için kullanılır.",
+      "tags": [
+        "sketchup",
+        "konsept",
+        "kutle-model",
+        "ruby",
+        "sahne",
+        "yerlesim"
+      ],
+      "triggers": [
+        "SketchUp brief",
+        "kütle model",
+        "konsept sahne",
+        "yerleşim modeli"
+      ],
+      "inputs": [
+        "concept_brief",
+        "site_constraints",
+        "massing_program",
+        "view_list"
+      ],
+      "outputs": [
+        "sketchup_ruby_script",
+        "massing_plan",
+        "scene_list",
+        "export_notes"
+      ],
+      "tools": [
+        {
+          "name": "check_sketchup_tools",
+          "type": "cli",
+          "path": "scripts/check_sketchup_tools.py",
+          "command": "python scripts/check_sketchup_tools.py"
+        },
+        {
+          "name": "generate_sketchup_massing_ruby",
+          "type": "cli",
+          "path": "scripts/generate_sketchup_massing_ruby.py",
+          "command": "python scripts/generate_sketchup_massing_ruby.py"
+        },
+        {
+          "name": "plan_sketchup_job",
+          "type": "cli",
+          "path": "scripts/plan_sketchup_job.py",
+          "command": "python scripts/plan_sketchup_job.py"
+        }
+      ],
+      "related_skills": [
+        "insaat-tasarim-ve-konsept",
+        "blender-3d-modelleme-ve-render"
+      ],
+      "risk_level": "low",
+      "requires_human_approval": false
+    },
+    {
+      "name": "cizim-dosya-donusum-ve-qa",
+      "version": "0.1.0",
+      "path": "cizim-dosya-donusum-ve-qa",
+      "manifest": "cizim-dosya-donusum-ve-qa/agents/openai.yaml",
+      "entrypoint": "cizim-dosya-donusum-ve-qa/SKILL.md",
+      "display_name": "Çizim Dosya Dönüşüm ve QA",
+      "description": "İnşaat, mimari, BIM, CAD, PDF, görsel ve 3D model dosyalarında DWG, DXF, PDF, IFC, RVT, SKP, OBJ, FBX, GLB, STL, STEP, IGES, SVG, PNG ve benzeri formatlar arası dönüşüm rotası, açık kaynak araç seçimi, dosya manifesti ve kalite kontrol raporu hazırlamak için kullanılır.",
+      "tags": [
+        "dosya-donusum",
+        "pdf",
+        "dwg",
+        "dxf",
+        "ifc",
+        "qa",
+        "format"
+      ],
+      "triggers": [
+        "dosya dönüşümü",
+        "PDF QA",
+        "DWG DXF IFC dönüştür",
+        "çizim paketini kontrol et"
+      ],
+      "inputs": [
+        "source_files",
+        "target_format",
+        "conversion_requirements",
+        "drawing_package"
+      ],
+      "outputs": [
+        "conversion_route",
+        "file_package_report",
+        "qa_flags",
+        "format_risk_notes"
+      ],
+      "tools": [
+        {
+          "name": "check_conversion_tools",
+          "type": "cli",
+          "path": "scripts/check_conversion_tools.py",
+          "command": "python scripts/check_conversion_tools.py"
+        },
+        {
+          "name": "inspect_conversion_package",
+          "type": "cli",
+          "path": "scripts/inspect_conversion_package.py",
+          "command": "python scripts/inspect_conversion_package.py"
+        },
+        {
+          "name": "plan_file_conversion",
+          "type": "cli",
+          "path": "scripts/plan_file_conversion.py",
+          "command": "python scripts/plan_file_conversion.py"
+        }
+      ],
+      "related_skills": [
+        "cad-autocad-dwg-dxf-isleme",
+        "bim-revit-ifc-model-kontrolu"
+      ],
+      "risk_level": "medium",
+      "requires_human_approval": true
+    },
+    {
+      "name": "insaat-hesaplamalar",
+      "version": "0.1.0",
+      "path": "insaat-hesaplamalar",
+      "manifest": "insaat-hesaplamalar/agents/openai.yaml",
+      "entrypoint": "insaat-hesaplamalar/SKILL.md",
+      "display_name": "İnşaat Hesaplamalar",
+      "description": "İnşaat, mimari, kaba yapı, ince işler, metraj, malzeme, alan, hacim, kazı-dolgu, beton, kalıp, donatı, birim dönüşümü, ön taşıyıcı sistem hesabı ve hesap kontrol raporu hazırlamak için kullanılır; mühendislik onayı yerine geçmez.",
+      "tags": [
+        "hesaplama",
+        "metraj",
+        "malzeme",
+        "birim",
+        "varsayim",
+        "formul"
+      ],
+      "triggers": [
+        "inşaat hesabı",
+        "malzeme hesabı",
+        "alan hacim ağırlık",
+        "beton donatı kalıp hesapla"
+      ],
+      "inputs": [
+        "calculation_request",
+        "dimensions",
+        "units",
+        "assumptions",
+        "material_specs"
+      ],
+      "outputs": [
+        "calculation_result",
+        "assumption_log",
+        "unit_check",
+        "risk_notes"
+      ],
+      "tools": [
+        {
+          "name": "basic_quantity_calculator",
+          "type": "cli",
+          "path": "scripts/basic_quantity_calculator.py",
+          "command": "python scripts/basic_quantity_calculator.py"
+        },
+        {
+          "name": "check_calculation_tools",
+          "type": "cli",
+          "path": "scripts/check_calculation_tools.py",
+          "command": "python scripts/check_calculation_tools.py"
+        },
+        {
+          "name": "plan_calculation_route",
+          "type": "cli",
+          "path": "scripts/plan_calculation_route.py",
+          "command": "python scripts/plan_calculation_route.py"
+        }
+      ],
+      "related_skills": [
+        "metraj-ve-mahal-kontrolu",
+        "teklif-ve-maliyet-tablolama"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "metraj-ve-mahal-kontrolu",
+      "version": "0.1.0",
+      "path": "metraj-ve-mahal-kontrolu",
+      "manifest": "metraj-ve-mahal-kontrolu/agents/openai.yaml",
+      "entrypoint": "metraj-ve-mahal-kontrolu/SKILL.md",
+      "display_name": "Metraj ve Mahal Kontrolü",
+      "description": "İnşaat, mimari, BIM, CAD, PDF ve tablo kaynaklarından mahal listesi, room/space schedule, metraj, alan, hacim, adet, quantity takeoff, mahal kodu, kat, net/brüt alan ve kaynaklar arası sapma kontrolü yapmak için kullanılır.",
+      "tags": [
+        "metraj",
+        "mahal",
+        "quantity",
+        "room-schedule",
+        "ifc",
+        "qa"
+      ],
+      "triggers": [
+        "metraj kontrolü",
+        "mahal listesi",
+        "room schedule karşılaştır",
+        "IFC space çıkar"
+      ],
+      "inputs": [
+        "quantity_table",
+        "room_schedule",
+        "ifc_model",
+        "boq",
+        "measurement_rules"
+      ],
+      "outputs": [
+        "quantity_comparison",
+        "space_schedule_report",
+        "metraj_qa_flags"
+      ],
+      "tools": [
+        {
+          "name": "check_metraj_tools",
+          "type": "cli",
+          "path": "scripts/check_metraj_tools.py",
+          "command": "python scripts/check_metraj_tools.py"
+        },
+        {
+          "name": "compare_room_schedules",
+          "type": "cli",
+          "path": "scripts/compare_room_schedules.py",
+          "command": "python scripts/compare_room_schedules.py"
+        },
+        {
+          "name": "extract_ifc_spaces_ifcopenshell",
+          "type": "cli",
+          "path": "scripts/extract_ifc_spaces_ifcopenshell.py",
+          "command": "python scripts/extract_ifc_spaces_ifcopenshell.py"
+        },
+        {
+          "name": "plan_metraj_mahal_route",
+          "type": "cli",
+          "path": "scripts/plan_metraj_mahal_route.py",
+          "command": "python scripts/plan_metraj_mahal_route.py"
+        }
+      ],
+      "related_skills": [
+        "bim-revit-ifc-model-kontrolu",
+        "teklif-ve-maliyet-tablolama"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "teknik-sartname-ve-uygulama-kontrolu",
+      "version": "0.1.0",
+      "path": "teknik-sartname-ve-uygulama-kontrolu",
+      "manifest": "teknik-sartname-ve-uygulama-kontrolu/agents/openai.yaml",
+      "entrypoint": "teknik-sartname-ve-uygulama-kontrolu/SKILL.md",
+      "display_name": "Teknik Şartname ve Uygulama Kontrolü",
+      "description": "İnşaat teknik şartname, uygulama kriteri, malzeme onayı, test raporu, tolerans, saha kanıtı ve BIM/IDS/BCF uygunsuzluk kontrolü yapmak için kullanılır.",
+      "tags": [
+        "teknik-sartname",
+        "uygulama-kontrol",
+        "evidence",
+        "ids",
+        "bcf",
+        "qa"
+      ],
+      "triggers": [
+        "şartname kontrolü",
+        "uygulama kanıtı",
+        "madde çıkar",
+        "checklist oluştur"
+      ],
+      "inputs": [
+        "specification",
+        "evidence_files",
+        "checklist",
+        "ids_file",
+        "site_records"
+      ],
+      "outputs": [
+        "clause_register",
+        "evidence_comparison",
+        "application_checklist",
+        "nonconformance_notes"
+      ],
+      "tools": [
+        {
+          "name": "check_spec_tools",
+          "type": "cli",
+          "path": "scripts/check_spec_tools.py",
+          "command": "python scripts/check_spec_tools.py"
+        },
+        {
+          "name": "compare_evidence_to_checklist",
+          "type": "cli",
+          "path": "scripts/compare_evidence_to_checklist.py",
+          "command": "python scripts/compare_evidence_to_checklist.py"
+        },
+        {
+          "name": "extract_spec_clauses",
+          "type": "cli",
+          "path": "scripts/extract_spec_clauses.py",
+          "command": "python scripts/extract_spec_clauses.py"
+        },
+        {
+          "name": "plan_spec_review_route",
+          "type": "cli",
+          "path": "scripts/plan_spec_review_route.py",
+          "command": "python scripts/plan_spec_review_route.py"
+        }
+      ],
+      "related_skills": [
+        "risk-guvenlik-ve-uygunluk-denetimi",
+        "dokuman-standartlastirma-ve-formatlama"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "insaat-tasarim-ve-konsept",
+      "version": "0.1.0",
+      "path": "insaat-tasarim-ve-konsept",
+      "manifest": "insaat-tasarim-ve-konsept/agents/openai.yaml",
+      "entrypoint": "insaat-tasarim-ve-konsept/SKILL.md",
+      "display_name": "İnşaat Tasarım ve Konsept",
+      "description": "İnşaat, mimari, arsa, yerleşim, kütle, mahal programı, konsept alternatifleri, erken sürdürülebilirlik, tasarım brief'i, sunum taslağı ve açık kaynak tasarım araç rotası üretmek için kullanılır.",
+      "tags": [
+        "tasarim",
+        "konsept",
+        "yerlesim",
+        "kutle",
+        "surdurulebilirlik",
+        "performans"
+      ],
+      "triggers": [
+        "konsept tasarım",
+        "yerleşim alternatifi",
+        "kütle opsiyonu",
+        "tasarım skoru"
+      ],
+      "inputs": [
+        "design_brief",
+        "site_data",
+        "program",
+        "constraints",
+        "performance_goals"
+      ],
+      "outputs": [
+        "concept_options",
+        "design_scorecard",
+        "layout_notes",
+        "risk_tradeoffs"
+      ],
+      "tools": [
+        {
+          "name": "check_design_tools",
+          "type": "cli",
+          "path": "scripts/check_design_tools.py",
+          "command": "python scripts/check_design_tools.py"
+        },
+        {
+          "name": "generate_concept_options",
+          "type": "cli",
+          "path": "scripts/generate_concept_options.py",
+          "command": "python scripts/generate_concept_options.py"
+        },
+        {
+          "name": "plan_design_concept_route",
+          "type": "cli",
+          "path": "scripts/plan_design_concept_route.py",
+          "command": "python scripts/plan_design_concept_route.py"
+        },
+        {
+          "name": "score_design_options",
+          "type": "cli",
+          "path": "scripts/score_design_options.py",
+          "command": "python scripts/score_design_options.py"
+        }
+      ],
+      "related_skills": [
+        "blender-3d-modelleme-ve-render",
+        "sketchup-konsept-ve-kutle-modelleme"
+      ],
+      "risk_level": "medium",
+      "requires_human_approval": true
+    },
+    {
+      "name": "teklif-ve-maliyet-tablolama",
+      "version": "0.1.0",
+      "path": "teklif-ve-maliyet-tablolama",
+      "manifest": "teklif-ve-maliyet-tablolama/agents/openai.yaml",
+      "entrypoint": "teklif-ve-maliyet-tablolama/SKILL.md",
+      "display_name": "Teklif ve Maliyet Tablolama",
+      "description": "İnşaat teklif, yaklaşık maliyet, BOQ, metraj-maliyet eşleştirme, birim fiyat, taşeron teklifi karşılaştırma, markup, KDV, risk payı, nakit akışı ve maliyet tablosu QA hazırlamak için kullanılır.",
+      "tags": [
+        "teklif",
+        "maliyet",
+        "boq",
+        "fiyat",
+        "excel",
+        "risk"
+      ],
+      "triggers": [
+        "teklif hazırla",
+        "maliyet tablosu",
+        "BOQ",
+        "birim fiyat",
+        "keşif özeti"
+      ],
+      "inputs": [
+        "boq_items",
+        "unit_prices",
+        "tax_rules",
+        "risk_allowances",
+        "supplier_quotes"
+      ],
+      "outputs": [
+        "cost_table",
+        "bid_summary",
+        "risk_allowance_report",
+        "xlsx_export"
+      ],
+      "tools": [
+        {
+          "name": "build_cost_table",
+          "type": "cli",
+          "path": "scripts/build_cost_table.py",
+          "command": "python scripts/build_cost_table.py"
+        },
+        {
+          "name": "check_cost_tools",
+          "type": "cli",
+          "path": "scripts/check_cost_tools.py",
+          "command": "python scripts/check_cost_tools.py"
+        },
+        {
+          "name": "plan_bid_cost_route",
+          "type": "cli",
+          "path": "scripts/plan_bid_cost_route.py",
+          "command": "python scripts/plan_bid_cost_route.py"
+        },
+        {
+          "name": "validate_cost_table",
+          "type": "cli",
+          "path": "scripts/validate_cost_table.py",
+          "command": "python scripts/validate_cost_table.py"
+        }
+      ],
+      "related_skills": [
+        "tedarik-ve-malzeme-karsilastirma",
+        "hakedis-ve-mutabakat-kontrolu"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "hakedis-ve-mutabakat-kontrolu",
+      "version": "0.1.0",
+      "path": "hakedis-ve-mutabakat-kontrolu",
+      "manifest": "hakedis-ve-mutabakat-kontrolu/agents/openai.yaml",
+      "entrypoint": "hakedis-ve-mutabakat-kontrolu/SKILL.md",
+      "display_name": "Hakediş ve Mutabakat Kontrolü",
+      "description": "İnşaat hakediş, ara ödeme, kesin hesap, metraj-mutabakat, fatura-ödeme eşleştirme, taşeron hakedişi, avans, teminat, kesinti, KDV, sözleşme kalemi ve ödeme farkı kontrolü yapmak için kullanılır.",
+      "tags": [
+        "hakedis",
+        "mutabakat",
+        "fatura",
+        "odeme",
+        "kesinti",
+        "hakediş"
+      ],
+      "triggers": [
+        "hakediş hesapla",
+        "mutabakat kontrolü",
+        "fatura ödeme karşılaştır",
+        "kesinti avans teminat"
+      ],
+      "inputs": [
+        "progress_items",
+        "contract_quantities",
+        "invoices",
+        "payments",
+        "deductions"
+      ],
+      "outputs": [
+        "progress_payment_report",
+        "reconciliation_report",
+        "mismatch_flags",
+        "payment_summary"
+      ],
+      "tools": [
+        {
+          "name": "calculate_progress_payment",
+          "type": "cli",
+          "path": "scripts/calculate_progress_payment.py",
+          "command": "python scripts/calculate_progress_payment.py"
+        },
+        {
+          "name": "check_progress_payment_tools",
+          "type": "cli",
+          "path": "scripts/check_progress_payment_tools.py",
+          "command": "python scripts/check_progress_payment_tools.py"
+        },
+        {
+          "name": "compare_progress_sources",
+          "type": "cli",
+          "path": "scripts/compare_progress_sources.py",
+          "command": "python scripts/compare_progress_sources.py"
+        },
+        {
+          "name": "plan_progress_payment_route",
+          "type": "cli",
+          "path": "scripts/plan_progress_payment_route.py",
+          "command": "python scripts/plan_progress_payment_route.py"
+        }
+      ],
+      "related_skills": [
+        "teklif-ve-maliyet-tablolama",
+        "metraj-ve-mahal-kontrolu"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "tedarik-ve-malzeme-karsilastirma",
+      "version": "0.1.0",
+      "path": "tedarik-ve-malzeme-karsilastirma",
+      "manifest": "tedarik-ve-malzeme-karsilastirma/agents/openai.yaml",
+      "entrypoint": "tedarik-ve-malzeme-karsilastirma/SKILL.md",
+      "display_name": "Tedarik ve Malzeme Karşılaştırma",
+      "description": "İnşaat tedarik, RFQ, tedarikçi teklif karşılaştırma, malzeme teknik uygunluk, datasheet/sertifika/numune kontrolü, fiyat-termin-stok-risk analizi ve satın alma karar tablosu hazırlamak için kullanılır.",
+      "tags": [
+        "tedarik",
+        "malzeme",
+        "rfq",
+        "supplier",
+        "datasheet",
+        "sertifika"
+      ],
+      "triggers": [
+        "tedarikçi karşılaştır",
+        "malzeme teknik uygunluk",
+        "RFQ",
+        "datasheet sertifika kontrolü"
+      ],
+      "inputs": [
+        "supplier_quotes",
+        "material_specs",
+        "datasheets",
+        "certificates",
+        "delivery_terms"
+      ],
+      "outputs": [
+        "supplier_comparison",
+        "material_compliance_matrix",
+        "procurement_risk_report"
+      ],
+      "tools": [
+        {
+          "name": "check_procurement_tools",
+          "type": "cli",
+          "path": "scripts/check_procurement_tools.py",
+          "command": "python scripts/check_procurement_tools.py"
+        },
+        {
+          "name": "compare_material_specs",
+          "type": "cli",
+          "path": "scripts/compare_material_specs.py",
+          "command": "python scripts/compare_material_specs.py"
+        },
+        {
+          "name": "compare_supplier_quotes",
+          "type": "cli",
+          "path": "scripts/compare_supplier_quotes.py",
+          "command": "python scripts/compare_supplier_quotes.py"
+        },
+        {
+          "name": "plan_procurement_route",
+          "type": "cli",
+          "path": "scripts/plan_procurement_route.py",
+          "command": "python scripts/plan_procurement_route.py"
+        }
+      ],
+      "related_skills": [
+        "teklif-ve-maliyet-tablolama",
+        "teknik-sartname-ve-uygulama-kontrolu"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "risk-guvenlik-ve-uygunluk-denetimi",
+      "version": "0.1.0",
+      "path": "risk-guvenlik-ve-uygunluk-denetimi",
+      "manifest": "risk-guvenlik-ve-uygunluk-denetimi/agents/openai.yaml",
+      "entrypoint": "risk-guvenlik-ve-uygunluk-denetimi/SKILL.md",
+      "display_name": "Risk Güvenlik ve Uygunluk Denetimi",
+      "description": "İnşaat risk kaydı, İSG saha denetimi, çalışma izni, uygunsuzluk, kanıt/evidence kontrolü, BIM/IFC IDS uyumluluk denetimi, BCF issue ve kapatma aksiyonu hazırlamak için kullanılır.",
+      "tags": [
+        "risk",
+        "isg",
+        "uygunluk",
+        "kanit",
+        "denetim",
+        "bcf"
+      ],
+      "triggers": [
+        "risk değerlendirmesi",
+        "İSG denetimi",
+        "uygunluk kontrolü",
+        "kanıt matrisi"
+      ],
+      "inputs": [
+        "risk_register",
+        "compliance_checklist",
+        "evidence_register",
+        "method_statement",
+        "permit_to_work"
+      ],
+      "outputs": [
+        "risk_score_report",
+        "compliance_audit",
+        "nonconformance_action_plan",
+        "evidence_gap_matrix"
+      ],
+      "tools": [
+        {
+          "name": "audit_compliance_checklist",
+          "type": "cli",
+          "path": "scripts/audit_compliance_checklist.py",
+          "command": "python scripts/audit_compliance_checklist.py"
+        },
+        {
+          "name": "check_risk_compliance_tools",
+          "type": "cli",
+          "path": "scripts/check_risk_compliance_tools.py",
+          "command": "python scripts/check_risk_compliance_tools.py"
+        },
+        {
+          "name": "plan_risk_compliance_route",
+          "type": "cli",
+          "path": "scripts/plan_risk_compliance_route.py",
+          "command": "python scripts/plan_risk_compliance_route.py"
+        },
+        {
+          "name": "score_risk_register",
+          "type": "cli",
+          "path": "scripts/score_risk_register.py",
+          "command": "python scripts/score_risk_register.py"
+        }
+      ],
+      "related_skills": [
+        "saha-fotograf-ve-kanit-analizi",
+        "teknik-sartname-ve-uygulama-kontrolu"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "musteri-ve-taseron-iletisim-hazirlayici",
+      "version": "0.1.0",
+      "path": "musteri-ve-taseron-iletisim-hazirlayici",
+      "manifest": "musteri-ve-taseron-iletisim-hazirlayici/agents/openai.yaml",
+      "entrypoint": "musteri-ve-taseron-iletisim-hazirlayici/SKILL.md",
+      "display_name": "Müşteri ve Taşeron İletişim Hazırlayıcı",
+      "description": "İnşaat projelerinde müşteri, işveren, taşeron, tedarikçi ve proje ekibi için RFI, submittal, transmittal, toplantı tutanağı, saha talimatı, aksiyon takibi, durum güncellemesi, gecikme/variasyon taslağı ve resmi olmayan iletişim paketleri hazırlamak için kullanılır.",
+      "tags": [
+        "iletisim",
+        "musteri",
+        "taseron",
+        "rfi",
+        "submittal",
+        "toplanti"
+      ],
+      "triggers": [
+        "müşteri e-postası",
+        "taşeron mesajı",
+        "RFI taslağı",
+        "toplantı tutanağı",
+        "aksiyon takibi"
+      ],
+      "inputs": [
+        "project_context",
+        "recipient",
+        "communication_type",
+        "facts",
+        "references",
+        "attachments"
+      ],
+      "outputs": [
+        "message_draft",
+        "meeting_minutes",
+        "action_list",
+        "communication_risk_check"
+      ],
+      "tools": [
+        {
+          "name": "check_communication_tools",
+          "type": "cli",
+          "path": "scripts/check_communication_tools.py",
+          "command": "python scripts/check_communication_tools.py"
+        },
+        {
+          "name": "draft_construction_message",
+          "type": "cli",
+          "path": "scripts/draft_construction_message.py",
+          "command": "python scripts/draft_construction_message.py"
+        },
+        {
+          "name": "plan_communication_route",
+          "type": "cli",
+          "path": "scripts/plan_communication_route.py",
+          "command": "python scripts/plan_communication_route.py"
+        },
+        {
+          "name": "validate_communication_pack",
+          "type": "cli",
+          "path": "scripts/validate_communication_pack.py",
+          "command": "python scripts/validate_communication_pack.py"
+        }
+      ],
+      "related_skills": [
+        "dokuman-standartlastirma-ve-formatlama",
+        "risk-guvenlik-ve-uygunluk-denetimi"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "saha-fotograf-ve-kanit-analizi",
+      "version": "0.1.0",
+      "path": "saha-fotograf-ve-kanit-analizi",
+      "manifest": "saha-fotograf-ve-kanit-analizi/agents/openai.yaml",
+      "entrypoint": "saha-fotograf-ve-kanit-analizi/SKILL.md",
+      "display_name": "Saha Fotoğraf ve Kanıt Analizi",
+      "description": "İnşaat saha fotoğrafları, video kareleri ve görsel kanıtlar için EXIF/metadata, hash, OCR, mahal/konum, ilerleme, kalite, İSG, uygunsuzluk, önce-sonra karşılaştırma, drone görselleri ve kanıt register analizi hazırlamak için kullanılır.",
+      "tags": [
+        "saha-fotografi",
+        "kanit",
+        "exif",
+        "ocr",
+        "privacy",
+        "drone"
+      ],
+      "triggers": [
+        "saha fotoğrafı",
+        "kanıt analizi",
+        "EXIF metadata",
+        "fotoğraf register",
+        "duplicate foto"
+      ],
+      "inputs": [
+        "photo_folder",
+        "image_files",
+        "project_context",
+        "evidence_register",
+        "annotations"
+      ],
+      "outputs": [
+        "photo_evidence_register",
+        "metadata_integrity_report",
+        "visual_findings",
+        "privacy_flags"
+      ],
+      "tools": [
+        {
+          "name": "build_photo_evidence_register",
+          "type": "cli",
+          "path": "scripts/build_photo_evidence_register.py",
+          "command": "python scripts/build_photo_evidence_register.py"
+        },
+        {
+          "name": "check_photo_evidence_tools",
+          "type": "cli",
+          "path": "scripts/check_photo_evidence_tools.py",
+          "command": "python scripts/check_photo_evidence_tools.py"
+        },
+        {
+          "name": "plan_photo_evidence_route",
+          "type": "cli",
+          "path": "scripts/plan_photo_evidence_route.py",
+          "command": "python scripts/plan_photo_evidence_route.py"
+        },
+        {
+          "name": "validate_photo_evidence_register",
+          "type": "cli",
+          "path": "scripts/validate_photo_evidence_register.py",
+          "command": "python scripts/validate_photo_evidence_register.py"
+        }
+      ],
+      "related_skills": [
+        "risk-guvenlik-ve-uygunluk-denetimi",
+        "musteri-ve-taseron-iletisim-hazirlayici"
+      ],
+      "risk_level": "high",
+      "requires_human_approval": true
+    },
+    {
+      "name": "dokuman-standartlastirma-ve-formatlama",
+      "version": "0.1.0",
+      "path": "dokuman-standartlastirma-ve-formatlama",
+      "manifest": "dokuman-standartlastirma-ve-formatlama/agents/openai.yaml",
+      "entrypoint": "dokuman-standartlastirma-ve-formatlama/SKILL.md",
+      "display_name": "Doküman Standartlaştırma ve Formatlama",
+      "description": "İnşaat proje dokümanları için DOCX, PDF, Markdown, XLSX, ODT, teknik rapor, şartname, method statement, toplantı tutanağı, RFI/submittal/transmittal, kapak, revizyon, stil, numaralandırma, dosya adlandırma, dönüşüm ve QA format kontrolü hazırlamak için kullanılır.",
+      "tags": [
+        "dokuman",
+        "formatlama",
+        "docx",
+        "pdf",
+        "markdown",
+        "revizyon",
+        "qa"
+      ],
+      "triggers": [
+        "doküman standardı",
+        "DOCX PDF formatla",
+        "Markdown QA",
+        "revizyon kontrolü"
+      ],
+      "inputs": [
+        "source_documents",
+        "document_type",
+        "template_requirements",
+        "revision_data",
+        "output_format"
+      ],
+      "outputs": [
+        "standardized_document",
+        "pdf_export",
+        "document_manifest",
+        "formatting_qa_report"
+      ],
+      "tools": [
+        {
+          "name": "check_document_format_tools",
+          "type": "cli",
+          "path": "scripts/check_document_format_tools.py",
+          "command": "python scripts/check_document_format_tools.py"
+        },
+        {
+          "name": "inspect_document_package",
+          "type": "cli",
+          "path": "scripts/inspect_document_package.py",
+          "command": "python scripts/inspect_document_package.py"
+        },
+        {
+          "name": "plan_document_standardization_route",
+          "type": "cli",
+          "path": "scripts/plan_document_standardization_route.py",
+          "command": "python scripts/plan_document_standardization_route.py"
+        },
+        {
+          "name": "validate_markdown_document",
+          "type": "cli",
+          "path": "scripts/validate_markdown_document.py",
+          "command": "python scripts/validate_markdown_document.py"
+        }
+      ],
+      "related_skills": [
+        "musteri-ve-taseron-iletisim-hazirlayici",
+        "teknik-sartname-ve-uygulama-kontrolu"
+      ],
+      "risk_level": "medium",
+      "requires_human_approval": true
+    }
   ]
 }

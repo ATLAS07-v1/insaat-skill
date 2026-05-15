@@ -1,3 +1,66 @@
+schema_version: 1.0.0
+name: teklif-ve-maliyet-tablolama
+version: 0.1.0
+language: tr
 display_name: Teklif ve Maliyet Tablolama
-short_description: İnşaat BOQ, birim fiyat, markup, KDV, taşeron karşılaştırması ve maliyet QA tabloları hazırlar.
-default_prompt: Kalem listesini, metrajları, birim fiyatları, para birimini ve markup/KDV varsayımlarını ver; teklif-maliyet tablosu, toplamlar, QA bayrakları ve risk notlarını çıkarayım.
+description: İnşaat teklif, yaklaşık maliyet, BOQ, metraj-maliyet eşleştirme, birim fiyat, taşeron teklifi karşılaştırma,
+  markup, KDV, risk payı, nakit akışı ve maliyet tablosu QA hazırlamak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Teklif ve Maliyet Tablolama skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- teklif
+- maliyet
+- boq
+- fiyat
+- excel
+- risk
+triggers:
+- teklif hazırla
+- maliyet tablosu
+- BOQ
+- birim fiyat
+- keşif özeti
+inputs:
+- boq_items
+- unit_prices
+- tax_rules
+- risk_allowances
+- supplier_quotes
+outputs:
+- cost_table
+- bid_summary
+- risk_allowance_report
+- xlsx_export
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Fiyat, ödeme, satın alma ve hakediş çıktıları yetkili finans/ticari onay gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: build_cost_table
+  type: cli
+  path: scripts/build_cost_table.py
+  command: python scripts/build_cost_table.py
+- name: check_cost_tools
+  type: cli
+  path: scripts/check_cost_tools.py
+  command: python scripts/check_cost_tools.py
+- name: plan_bid_cost_route
+  type: cli
+  path: scripts/plan_bid_cost_route.py
+  command: python scripts/plan_bid_cost_route.py
+- name: validate_cost_table
+  type: cli
+  path: scripts/validate_cost_table.py
+  command: python scripts/validate_cost_table.py
+related_skills:
+- tedarik-ve-malzeme-karsilastirma
+- hakedis-ve-mutabakat-kontrolu

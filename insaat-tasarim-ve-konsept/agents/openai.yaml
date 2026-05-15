@@ -1,3 +1,62 @@
+schema_version: 1.0.0
+name: insaat-tasarim-ve-konsept
+version: 0.1.0
+language: tr
 display_name: İnşaat Tasarım ve Konsept
-short_description: Arsa, mahal programı ve hedeflerden konsept alternatifleri, kütle kararları, performans notları ve araç rotası üretir.
-default_prompt: Proje tipini, arsa/veri bilgilerini, mahal programını ve tasarım hedeflerini ver; konsept alternatifleri, karar matrisi ve sonraki araç rotasını çıkarayım.
+description: İnşaat, mimari, arsa, yerleşim, kütle, mahal programı, konsept alternatifleri, erken sürdürülebilirlik, tasarım
+  brief'i, sunum taslağı ve açık kaynak tasarım araç rotası üretmek için kullanılır.
+entrypoint: SKILL.md
+default_prompt: İnşaat Tasarım ve Konsept skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- tasarim
+- konsept
+- yerlesim
+- kutle
+- surdurulebilirlik
+- performans
+triggers:
+- konsept tasarım
+- yerleşim alternatifi
+- kütle opsiyonu
+- tasarım skoru
+inputs:
+- design_brief
+- site_data
+- program
+- constraints
+- performance_goals
+outputs:
+- concept_options
+- design_scorecard
+- layout_notes
+- risk_tradeoffs
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+risk_level: medium
+requires_human_approval: true
+human_approval_contexts:
+- teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
+- kaynak verisi eksik veya varsayım kullanılan çıktı
+tools:
+- name: check_design_tools
+  type: cli
+  path: scripts/check_design_tools.py
+  command: python scripts/check_design_tools.py
+- name: generate_concept_options
+  type: cli
+  path: scripts/generate_concept_options.py
+  command: python scripts/generate_concept_options.py
+- name: plan_design_concept_route
+  type: cli
+  path: scripts/plan_design_concept_route.py
+  command: python scripts/plan_design_concept_route.py
+- name: score_design_options
+  type: cli
+  path: scripts/score_design_options.py
+  command: python scripts/score_design_options.py
+related_skills:
+- blender-3d-modelleme-ve-render
+- sketchup-konsept-ve-kutle-modelleme

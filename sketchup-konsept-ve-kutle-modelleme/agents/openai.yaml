@@ -1,3 +1,55 @@
-display_name: SketchUp Konsept ve Kütle
-short_description: SketchUp konsept, kütle model, sahne listesi, Ruby API otomasyonu ve SKP/export QA akışı hazırlar.
-default_prompt: SketchUp için konsept/kütle model hedefini, ölçüleri, kat bilgilerini, sahne listesini ve teslim formatını ver; uygun modelleme rotasını ve gerekirse Ruby API script'ini hazırlayayım.
+schema_version: 1.0.0
+name: sketchup-konsept-ve-kutle-modelleme
+version: 0.1.0
+language: tr
+display_name: SketchUp Konsept ve Kütle Modelleme
+description: İnşaat, mimari, iç mekan, arsa, cephe ve şantiye bağlamında SketchUp ile hızlı konsept, kütle model, yerleşim,
+  sahne/görünüş listesi, Ruby API otomasyonu, SKP/export planı ve model kalite kontrolü hazırlamak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: SketchUp Konsept ve Kütle Modelleme skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
+  uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- sketchup
+- konsept
+- kutle-model
+- ruby
+- sahne
+- yerlesim
+triggers:
+- SketchUp brief
+- kütle model
+- konsept sahne
+- yerleşim modeli
+inputs:
+- concept_brief
+- site_constraints
+- massing_program
+- view_list
+outputs:
+- sketchup_ruby_script
+- massing_plan
+- scene_list
+- export_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+risk_level: low
+requires_human_approval: false
+human_approval_contexts:
+- nihai teslim veya üçüncü taraf paylaşımı
+tools:
+- name: check_sketchup_tools
+  type: cli
+  path: scripts/check_sketchup_tools.py
+  command: python scripts/check_sketchup_tools.py
+- name: generate_sketchup_massing_ruby
+  type: cli
+  path: scripts/generate_sketchup_massing_ruby.py
+  command: python scripts/generate_sketchup_massing_ruby.py
+- name: plan_sketchup_job
+  type: cli
+  path: scripts/plan_sketchup_job.py
+  command: python scripts/plan_sketchup_job.py
+related_skills:
+- insaat-tasarim-ve-konsept
+- blender-3d-modelleme-ve-render

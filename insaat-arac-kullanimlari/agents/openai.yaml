@@ -1,4 +1,60 @@
-interface:
-  display_name: "İnşaat Araç Kullanımları"
-  short_description: "İnşaat dosyalarını araçlara yönlendirir"
-  default_prompt: "Use $insaat-arac-kullanimlari to inspect construction PDFs, spreadsheets, CAD/BIM files, images, and folders, then extract evidence-backed normalized data for the next construction skill."
+schema_version: 1.0.0
+name: insaat-arac-kullanimlari
+version: 0.1.0
+language: tr
+display_name: İnşaat Araç Kullanımları
+description: İnşaat operasyonunda PDF, Excel, CSV, CAD/DWG/DXF, IFC/BIM, görsel, klasör ve arşiv girdilerini incelemek, doğru
+  açık kaynak araca yönlendirmek, kanıtlı veri çıkarmak ve sonraki inşaat skill'lerine temiz veri hazırlamak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: İnşaat Araç Kullanımları skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- insaat
+- arac-secimi
+- dosya-inceleme
+- dokuman
+- tablo
+- rota-planlama
+triggers:
+- inşaat girdilerini incele
+- hangi araçla açılır
+- dosya envanteri
+- araç kullanım rotası
+inputs:
+- construction_files
+- pdf
+- docx
+- xlsx
+- csv
+- images
+- project_context
+outputs:
+- input_inventory
+- tool_route
+- document_skeleton
+- table_skeleton
+- qa_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+risk_level: medium
+requires_human_approval: false
+human_approval_contexts:
+- teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
+- kaynak verisi eksik veya varsayım kullanılan çıktı
+tools:
+- name: extract_document_skeleton
+  type: cli
+  path: scripts/extract_document_skeleton.py
+  command: python scripts/extract_document_skeleton.py
+- name: extract_table_skeleton
+  type: cli
+  path: scripts/extract_table_skeleton.py
+  command: python scripts/extract_table_skeleton.py
+- name: inspect_construction_inputs
+  type: cli
+  path: scripts/inspect_construction_inputs.py
+  command: python scripts/inspect_construction_inputs.py
+related_skills:
+- cizim-dosya-donusum-ve-qa
+- dokuman-standartlastirma-ve-formatlama

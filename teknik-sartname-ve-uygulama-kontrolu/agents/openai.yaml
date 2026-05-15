@@ -1,3 +1,64 @@
+schema_version: 1.0.0
+name: teknik-sartname-ve-uygulama-kontrolu
+version: 0.1.0
+language: tr
 display_name: Teknik Şartname ve Uygulama Kontrolü
-short_description: Teknik şartname maddelerini kontrol listesine çevirir, uygulama kanıtlarıyla eşleştirir ve uygunsuzluk/eksik kanıt raporu üretir.
-default_prompt: Teknik şartname, uygulama metodu, test raporu veya saha kanıtlarını paylaş; madde bazlı kontrol listesi, gerekli kanıtlar, uygunsuzluklar ve onay gerektiren noktaları çıkarayım.
+description: İnşaat teknik şartname, uygulama kriteri, malzeme onayı, test raporu, tolerans, saha kanıtı ve BIM/IDS/BCF uygunsuzluk
+  kontrolü yapmak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Teknik Şartname ve Uygulama Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
+  uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- teknik-sartname
+- uygulama-kontrol
+- evidence
+- ids
+- bcf
+- qa
+triggers:
+- şartname kontrolü
+- uygulama kanıtı
+- madde çıkar
+- checklist oluştur
+inputs:
+- specification
+- evidence_files
+- checklist
+- ids_file
+- site_records
+outputs:
+- clause_register
+- evidence_comparison
+- application_checklist
+- nonconformance_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: check_spec_tools
+  type: cli
+  path: scripts/check_spec_tools.py
+  command: python scripts/check_spec_tools.py
+- name: compare_evidence_to_checklist
+  type: cli
+  path: scripts/compare_evidence_to_checklist.py
+  command: python scripts/compare_evidence_to_checklist.py
+- name: extract_spec_clauses
+  type: cli
+  path: scripts/extract_spec_clauses.py
+  command: python scripts/extract_spec_clauses.py
+- name: plan_spec_review_route
+  type: cli
+  path: scripts/plan_spec_review_route.py
+  command: python scripts/plan_spec_review_route.py
+related_skills:
+- risk-guvenlik-ve-uygunluk-denetimi
+- dokuman-standartlastirma-ve-formatlama

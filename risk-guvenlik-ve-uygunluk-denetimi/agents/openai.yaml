@@ -1,40 +1,65 @@
+schema_version: 1.0.0
 name: risk-guvenlik-ve-uygunluk-denetimi
 version: 0.1.0
 language: tr
-description: İnşaat risk, saha güvenliği, kanıt ve uygunluk denetimi için Hermes/Codex skill tanımı.
+display_name: Risk Güvenlik ve Uygunluk Denetimi
+description: İnşaat risk kaydı, İSG saha denetimi, çalışma izni, uygunsuzluk, kanıt/evidence kontrolü, BIM/IFC IDS uyumluluk
+  denetimi, BCF issue ve kapatma aksiyonu hazırlamak için kullanılır.
 entrypoint: SKILL.md
+default_prompt: Risk Güvenlik ve Uygunluk Denetimi skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et,
+  uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
 tags:
-  - insaat
-  - risk
-  - isg
-  - saha-denetimi
-  - uygunluk
-  - kanit
-  - ifc
-  - ids
-  - bcf
+- risk
+- isg
+- uygunluk
+- kanit
+- denetim
+- bcf
+triggers:
+- risk değerlendirmesi
+- İSG denetimi
+- uygunluk kontrolü
+- kanıt matrisi
 inputs:
-  - risk_register
-  - compliance_checklist
-  - evidence_register
-  - method_statement
-  - permit_to_work
-  - inspection_photos
-  - ifc_model
-  - ids_file
+- risk_register
+- compliance_checklist
+- evidence_register
+- method_statement
+- permit_to_work
 outputs:
-  - risk_register_report
-  - compliance_audit_report
-  - nonconformance_action_plan
-  - bcf_issue_summary
-  - evidence_gap_matrix
+- risk_score_report
+- compliance_audit
+- nonconformance_action_plan
+- evidence_gap_matrix
 guardrails:
-  - Bu skill resmi İSG, hukuk veya yapı denetim onayı vermez.
-  - Kaynak güncelliği doğrulanmadan mevzuat uygunluğu kesin ifade edilmez.
-  - Kritik risklerde yetkili saha sorumlusu, İSG uzmanı veya ilgili mühendis onayı gerekir.
-  - Kanıt bulunmayan gereksinimler uygun kabul edilmez.
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Resmi İSG, hukuk veya yapı denetim uygunluğu kesin ifade edilmez.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
 tools:
-  check_tools: scripts/check_risk_compliance_tools.py
-  plan_route: scripts/plan_risk_compliance_route.py
-  score_risks: scripts/score_risk_register.py
-  audit_checklist: scripts/audit_compliance_checklist.py
+- name: audit_compliance_checklist
+  type: cli
+  path: scripts/audit_compliance_checklist.py
+  command: python scripts/audit_compliance_checklist.py
+- name: check_risk_compliance_tools
+  type: cli
+  path: scripts/check_risk_compliance_tools.py
+  command: python scripts/check_risk_compliance_tools.py
+- name: plan_risk_compliance_route
+  type: cli
+  path: scripts/plan_risk_compliance_route.py
+  command: python scripts/plan_risk_compliance_route.py
+- name: score_risk_register
+  type: cli
+  path: scripts/score_risk_register.py
+  command: python scripts/score_risk_register.py
+related_skills:
+- saha-fotograf-ve-kanit-analizi
+- teknik-sartname-ve-uygulama-kontrolu

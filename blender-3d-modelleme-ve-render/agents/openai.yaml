@@ -1,4 +1,56 @@
-interface:
-  display_name: "Blender 3D Modelleme ve Render"
-  short_description: "Ölçülü Blender sahnesi ve render üretir"
-  default_prompt: "Use $blender-3d-modelleme-ve-render to create or plan Blender Python scenes, construction massing models, concept renders, BIM/IFC visualization, and render/export QA."
+schema_version: 1.0.0
+name: blender-3d-modelleme-ve-render
+version: 0.1.0
+language: tr
+display_name: Blender 3D Modelleme ve Render
+description: İnşaat, mimari, iç mekan, cephe, şantiye ve BIM/IFC bağlamında Blender ile ölçülü 3D kütle model, konsept sahne,
+  uygulama detayı, malzeme/ışık/kamera kurulumu, render/export ve kalite kontrol çıktıları üretmek için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Blender 3D Modelleme ve Render skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
+  araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- blender
+- 3d
+- render
+- python
+- modelleme
+- gorsellestirme
+triggers:
+- Blender sahnesi oluştur
+- 3D render
+- kütle model
+- malzeme ışık kamera
+inputs:
+- scene_brief
+- model_reference
+- materials
+- camera_views
+- export_format
+outputs:
+- blender_script
+- scene_plan
+- render_plan
+- export_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+risk_level: low
+requires_human_approval: false
+human_approval_contexts:
+- nihai teslim veya üçüncü taraf paylaşımı
+tools:
+- name: check_blender_tools
+  type: cli
+  path: scripts/check_blender_tools.py
+  command: python scripts/check_blender_tools.py
+- name: create_construction_scene
+  type: cli
+  path: scripts/create_construction_scene.py
+  command: python scripts/create_construction_scene.py
+- name: plan_blender_job
+  type: cli
+  path: scripts/plan_blender_job.py
+  command: python scripts/plan_blender_job.py
+related_skills:
+- insaat-tasarim-ve-konsept
+- sketchup-konsept-ve-kutle-modelleme

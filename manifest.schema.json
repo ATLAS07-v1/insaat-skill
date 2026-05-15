@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ATLAS07-v1/insaat-skill/manifest.schema.json",
+  "title": "Construction AI Skill Set Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "name",
+    "version",
+    "language",
+    "description",
+    "repository",
+    "skill_count",
+    "skills"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "skill_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/skill_index_item"
+      }
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "path",
+        "command"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "cli"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "skill_index_item": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "path",
+        "manifest",
+        "entrypoint",
+        "display_name",
+        "description",
+        "tags",
+        "triggers",
+        "inputs",
+        "outputs",
+        "tools",
+        "related_skills",
+        "risk_level",
+        "requires_human_approval"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "manifest": {
+          "type": "string"
+        },
+        "entrypoint": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/$defs/string_list"
+        },
+        "triggers": {
+          "$ref": "#/$defs/string_list"
+        },
+        "inputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "outputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tool"
+          }
+        },
+        "related_skills": {
+          "$ref": "#/$defs/string_list"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "requires_human_approval": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "skill_manifest": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "name",
+        "version",
+        "language",
+        "display_name",
+        "description",
+        "entrypoint",
+        "default_prompt",
+        "tags",
+        "triggers",
+        "inputs",
+        "outputs",
+        "guardrails",
+        "risk_level",
+        "requires_human_approval",
+        "human_approval_contexts",
+        "tools",
+        "related_skills"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entrypoint": {
+          "type": "string"
+        },
+        "default_prompt": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/$defs/string_list"
+        },
+        "triggers": {
+          "$ref": "#/$defs/string_list"
+        },
+        "inputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "outputs": {
+          "$ref": "#/$defs/string_list"
+        },
+        "guardrails": {
+          "$ref": "#/$defs/string_list"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "requires_human_approval": {
+          "type": "boolean"
+        },
+        "human_approval_contexts": {
+          "$ref": "#/$defs/string_list"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tool"
+          }
+        },
+        "related_skills": {
+          "$ref": "#/$defs/string_list"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

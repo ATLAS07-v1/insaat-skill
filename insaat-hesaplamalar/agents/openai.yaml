@@ -1,3 +1,60 @@
+schema_version: 1.0.0
+name: insaat-hesaplamalar
+version: 0.1.0
+language: tr
 display_name: İnşaat Hesaplamalar
-short_description: İnşaat alan, hacim, metraj, beton, kalıp, donatı, birim dönüşümü ve ön hesap QA raporları hazırlar.
-default_prompt: Hesaplamak istediğin inşaat kalemini, ölçüleri, birimleri, fire/boşluk varsayımlarını ve hedef çıktı formatını ver; formüllü hesap ve QA bayraklarını çıkarayım.
+description: İnşaat, mimari, kaba yapı, ince işler, metraj, malzeme, alan, hacim, kazı-dolgu, beton, kalıp, donatı, birim
+  dönüşümü, ön taşıyıcı sistem hesabı ve hesap kontrol raporu hazırlamak için kullanılır; mühendislik onayı yerine geçmez.
+entrypoint: SKILL.md
+default_prompt: İnşaat Hesaplamalar skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç rotasını
+  seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- hesaplama
+- metraj
+- malzeme
+- birim
+- varsayim
+- formul
+triggers:
+- inşaat hesabı
+- malzeme hesabı
+- alan hacim ağırlık
+- beton donatı kalıp hesapla
+inputs:
+- calculation_request
+- dimensions
+- units
+- assumptions
+- material_specs
+outputs:
+- calculation_result
+- assumption_log
+- unit_check
+- risk_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: basic_quantity_calculator
+  type: cli
+  path: scripts/basic_quantity_calculator.py
+  command: python scripts/basic_quantity_calculator.py
+- name: check_calculation_tools
+  type: cli
+  path: scripts/check_calculation_tools.py
+  command: python scripts/check_calculation_tools.py
+- name: plan_calculation_route
+  type: cli
+  path: scripts/plan_calculation_route.py
+  command: python scripts/plan_calculation_route.py
+related_skills:
+- metraj-ve-mahal-kontrolu
+- teklif-ve-maliyet-tablolama

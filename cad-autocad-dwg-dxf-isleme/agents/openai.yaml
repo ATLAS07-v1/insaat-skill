@@ -1,4 +1,60 @@
-interface:
-  display_name: "CAD DWG/DXF İşleme"
-  short_description: "AutoCAD çizimlerini açık kaynak araçlarla inceler"
-  default_prompt: "Use $cad-autocad-dwg-dxf-isleme to inspect DWG/DXF drawings, choose an open-source conversion route, extract CAD layer/block/entity evidence, and produce a QA/markup report."
+schema_version: 1.0.0
+name: cad-autocad-dwg-dxf-isleme
+version: 0.1.0
+language: tr
+display_name: CAD AutoCAD DWG/DXF İşleme
+description: AutoCAD kaynaklı DWG/DXF çizimlerini açık kaynak araçlarla güvenli incelemek, DWG'yi DXF'e dönüştürme rotası
+  seçmek, DXF layer/block/entity/ölçü/mahal/ölçek kontrolü yapmak, çizim QA raporu ve revizyon-markup listesi üretmek için
+  kullanılır.
+entrypoint: SKILL.md
+default_prompt: CAD AutoCAD DWG/DXF İşleme skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- cad
+- autocad
+- dwg
+- dxf
+- layer
+- block
+- markup
+triggers:
+- DWG incele
+- DXF analiz et
+- CAD layer kontrolü
+- AutoCAD dönüşüm planı
+inputs:
+- dwg_file
+- dxf_file
+- pdf_markup
+- cad_standards
+- layer_list
+outputs:
+- cad_qa_report
+- dxf_entity_report
+- conversion_plan
+- markup_summary
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+risk_level: medium
+requires_human_approval: true
+human_approval_contexts:
+- teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
+- kaynak verisi eksik veya varsayım kullanılan çıktı
+tools:
+- name: check_cad_tools
+  type: cli
+  path: scripts/check_cad_tools.py
+  command: python scripts/check_cad_tools.py
+- name: inspect_dxf_ezdxf
+  type: cli
+  path: scripts/inspect_dxf_ezdxf.py
+  command: python scripts/inspect_dxf_ezdxf.py
+- name: plan_dwg_conversion
+  type: cli
+  path: scripts/plan_dwg_conversion.py
+  command: python scripts/plan_dwg_conversion.py
+related_skills:
+- cizim-dosya-donusum-ve-qa
+- metraj-ve-mahal-kontrolu

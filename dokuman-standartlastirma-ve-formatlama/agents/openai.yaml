@@ -1,39 +1,64 @@
+schema_version: 1.0.0
 name: dokuman-standartlastirma-ve-formatlama
 version: 0.1.0
 language: tr
-description: İnşaat proje dokümanları için DOCX/PDF/Markdown/XLSX format standardı, revizyon, dosya adlandırma, dönüşüm ve QA kontrolü yapan Hermes/Codex skill tanımı.
+display_name: Doküman Standartlaştırma ve Formatlama
+description: İnşaat proje dokümanları için DOCX, PDF, Markdown, XLSX, ODT, teknik rapor, şartname, method statement, toplantı
+  tutanağı, RFI/submittal/transmittal, kapak, revizyon, stil, numaralandırma, dosya adlandırma, dönüşüm ve QA format kontrolü
+  hazırlamak için kullanılır.
 entrypoint: SKILL.md
+default_prompt: Doküman Standartlaştırma ve Formatlama skillini kullanarak kullanıcının inşaat operasyonu talebini analiz
+  et, uygun araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
 tags:
-  - insaat
-  - dokuman
-  - docx
-  - pdf
-  - markdown
-  - revizyon
-  - formatlama
-  - standardizasyon
-  - qa
+- dokuman
+- formatlama
+- docx
+- pdf
+- markdown
+- revizyon
+- qa
+triggers:
+- doküman standardı
+- DOCX PDF formatla
+- Markdown QA
+- revizyon kontrolü
 inputs:
-  - source_documents
-  - document_type
-  - template_requirements
-  - revision_data
-  - output_format
-  - package_folder
+- source_documents
+- document_type
+- template_requirements
+- revision_data
+- output_format
 outputs:
-  - standardized_document
-  - pdf_export
-  - document_manifest
-  - formatting_qa_report
-  - revision_check_report
-  - markdown_lint_report
+- standardized_document
+- pdf_export
+- document_manifest
+- formatting_qa_report
 guardrails:
-  - Format standardizasyonu teknik, hukuki veya sözleşmesel onay yerine geçmez.
-  - PDF/DOCX dönüşümü sonrası görsel QA yapılmadan teslim tamam sayılmaz.
-  - Placeholder ve örnek metin teslim dokümanında bırakılmaz.
-  - Revizyon, tarih ve doküman kodu çelişkileri bayraklanır.
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+risk_level: medium
+requires_human_approval: true
+human_approval_contexts:
+- teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
+- kaynak verisi eksik veya varsayım kullanılan çıktı
 tools:
-  check_tools: scripts/check_document_format_tools.py
-  plan_route: scripts/plan_document_standardization_route.py
-  inspect_package: scripts/inspect_document_package.py
-  validate_markdown: scripts/validate_markdown_document.py
+- name: check_document_format_tools
+  type: cli
+  path: scripts/check_document_format_tools.py
+  command: python scripts/check_document_format_tools.py
+- name: inspect_document_package
+  type: cli
+  path: scripts/inspect_document_package.py
+  command: python scripts/inspect_document_package.py
+- name: plan_document_standardization_route
+  type: cli
+  path: scripts/plan_document_standardization_route.py
+  command: python scripts/plan_document_standardization_route.py
+- name: validate_markdown_document
+  type: cli
+  path: scripts/validate_markdown_document.py
+  command: python scripts/validate_markdown_document.py
+related_skills:
+- musteri-ve-taseron-iletisim-hazirlayici
+- teknik-sartname-ve-uygulama-kontrolu

@@ -1,3 +1,59 @@
-display_name: Çizim Dönüşüm ve QA
-short_description: CAD, BIM, PDF, görsel ve 3D dosyaları için dönüşüm rotası, açık kaynak araç seçimi ve QA raporu hazırlar.
-default_prompt: Dönüştürmek istediğin dosyaları, hedef formatı ve teslim amacını ver; güvenli araç rotasını, komut planını ve QA bayraklarını çıkarayım.
+schema_version: 1.0.0
+name: cizim-dosya-donusum-ve-qa
+version: 0.1.0
+language: tr
+display_name: Çizim Dosya Dönüşüm ve QA
+description: İnşaat, mimari, BIM, CAD, PDF, görsel ve 3D model dosyalarında DWG, DXF, PDF, IFC, RVT, SKP, OBJ, FBX, GLB, STL,
+  STEP, IGES, SVG, PNG ve benzeri formatlar arası dönüşüm rotası, açık kaynak araç seçimi, dosya manifesti ve kalite kontrol
+  raporu hazırlamak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Çizim Dosya Dönüşüm ve QA skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- dosya-donusum
+- pdf
+- dwg
+- dxf
+- ifc
+- qa
+- format
+triggers:
+- dosya dönüşümü
+- PDF QA
+- DWG DXF IFC dönüştür
+- çizim paketini kontrol et
+inputs:
+- source_files
+- target_format
+- conversion_requirements
+- drawing_package
+outputs:
+- conversion_route
+- file_package_report
+- qa_flags
+- format_risk_notes
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+risk_level: medium
+requires_human_approval: true
+human_approval_contexts:
+- teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
+- kaynak verisi eksik veya varsayım kullanılan çıktı
+tools:
+- name: check_conversion_tools
+  type: cli
+  path: scripts/check_conversion_tools.py
+  command: python scripts/check_conversion_tools.py
+- name: inspect_conversion_package
+  type: cli
+  path: scripts/inspect_conversion_package.py
+  command: python scripts/inspect_conversion_package.py
+- name: plan_file_conversion
+  type: cli
+  path: scripts/plan_file_conversion.py
+  command: python scripts/plan_file_conversion.py
+related_skills:
+- cad-autocad-dwg-dxf-isleme
+- bim-revit-ifc-model-kontrolu

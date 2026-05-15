@@ -1,3 +1,63 @@
+schema_version: 1.0.0
+name: metraj-ve-mahal-kontrolu
+version: 0.1.0
+language: tr
 display_name: Metraj ve Mahal Kontrolü
-short_description: Mahal listesi, room/space schedule, metraj, alan, hacim ve kaynaklar arası sapma QA raporu hazırlar.
-default_prompt: Kontrol edilecek mahal/metraj kaynaklarını, kolon adlarını, toleransı ve net/brüt ölçüm kuralını ver; sapma ve QA raporunu çıkarayım.
+description: İnşaat, mimari, BIM, CAD, PDF ve tablo kaynaklarından mahal listesi, room/space schedule, metraj, alan, hacim,
+  adet, quantity takeoff, mahal kodu, kat, net/brüt alan ve kaynaklar arası sapma kontrolü yapmak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Metraj ve Mahal Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun araç
+  rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- metraj
+- mahal
+- quantity
+- room-schedule
+- ifc
+- qa
+triggers:
+- metraj kontrolü
+- mahal listesi
+- room schedule karşılaştır
+- IFC space çıkar
+inputs:
+- quantity_table
+- room_schedule
+- ifc_model
+- boq
+- measurement_rules
+outputs:
+- quantity_comparison
+- space_schedule_report
+- metraj_qa_flags
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: check_metraj_tools
+  type: cli
+  path: scripts/check_metraj_tools.py
+  command: python scripts/check_metraj_tools.py
+- name: compare_room_schedules
+  type: cli
+  path: scripts/compare_room_schedules.py
+  command: python scripts/compare_room_schedules.py
+- name: extract_ifc_spaces_ifcopenshell
+  type: cli
+  path: scripts/extract_ifc_spaces_ifcopenshell.py
+  command: python scripts/extract_ifc_spaces_ifcopenshell.py
+- name: plan_metraj_mahal_route
+  type: cli
+  path: scripts/plan_metraj_mahal_route.py
+  command: python scripts/plan_metraj_mahal_route.py
+related_skills:
+- bim-revit-ifc-model-kontrolu
+- teklif-ve-maliyet-tablolama

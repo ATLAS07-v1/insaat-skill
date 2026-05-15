@@ -1,3 +1,65 @@
+schema_version: 1.0.0
+name: hakedis-ve-mutabakat-kontrolu
+version: 0.1.0
+language: tr
 display_name: Hakediş ve Mutabakat Kontrolü
-short_description: Hakediş icmali, metraj-fatura-ödeme mutabakatı, avans/teminat/KDV/kesinti ve fark QA raporu hazırlar.
-default_prompt: Sözleşme kalemlerini, önceki hakedişi, cari onaylı miktarları, fatura/ödeme kayıtlarını ve kesinti varsayımlarını ver; hakediş hesabı, mutabakat farkları ve QA bayraklarını çıkarayım.
+description: İnşaat hakediş, ara ödeme, kesin hesap, metraj-mutabakat, fatura-ödeme eşleştirme, taşeron hakedişi, avans, teminat,
+  kesinti, KDV, sözleşme kalemi ve ödeme farkı kontrolü yapmak için kullanılır.
+entrypoint: SKILL.md
+default_prompt: Hakediş ve Mutabakat Kontrolü skillini kullanarak kullanıcının inşaat operasyonu talebini analiz et, uygun
+  araç rotasını seç, çıktı sınırlarını ve gerekli insan onaylarını belirt.
+tags:
+- hakedis
+- mutabakat
+- fatura
+- odeme
+- kesinti
+- hakediş
+triggers:
+- hakediş hesapla
+- mutabakat kontrolü
+- fatura ödeme karşılaştır
+- kesinti avans teminat
+inputs:
+- progress_items
+- contract_quantities
+- invoices
+- payments
+- deductions
+outputs:
+- progress_payment_report
+- reconciliation_report
+- mismatch_flags
+- payment_summary
+guardrails:
+- Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.
+- Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
+- Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
+- Fiyat, ödeme, satın alma ve hakediş çıktıları yetkili finans/ticari onay gerektirir.
+- Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
+risk_level: high
+requires_human_approval: true
+human_approval_contexts:
+- teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
+- üçüncü taraf gönderimi veya şirket adına taahhüt
+- resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+tools:
+- name: calculate_progress_payment
+  type: cli
+  path: scripts/calculate_progress_payment.py
+  command: python scripts/calculate_progress_payment.py
+- name: check_progress_payment_tools
+  type: cli
+  path: scripts/check_progress_payment_tools.py
+  command: python scripts/check_progress_payment_tools.py
+- name: compare_progress_sources
+  type: cli
+  path: scripts/compare_progress_sources.py
+  command: python scripts/compare_progress_sources.py
+- name: plan_progress_payment_route
+  type: cli
+  path: scripts/plan_progress_payment_route.py
+  command: python scripts/plan_progress_payment_route.py
+related_skills:
+- teklif-ve-maliyet-tablolama
+- metraj-ve-mahal-kontrolu
