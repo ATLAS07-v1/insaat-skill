@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Risk Register",
+  "type": "object",
+  "required": ["risks"],
+  "properties": {
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "hazard", "likelihood", "severity"],
+        "properties": {
+          "id": {"type": "string"},
+          "activity": {"type": "string"},
+          "hazard": {"type": "string"},
+          "location": {"type": "string"},
+          "likelihood": {"type": ["number", "string"]},
+          "severity": {"type": ["number", "string"]},
+          "controls": {"type": ["array", "string"]},
+          "evidence": {"type": ["array", "string"]},
+          "owner": {"type": "string"},
+          "due_date": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

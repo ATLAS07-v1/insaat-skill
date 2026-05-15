@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from jsonschema import Draft202012Validator
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,11 +33,19 @@ REQUIRED_MANIFEST_FIELDS = {
     "risk_level",
     "requires_human_approval",
     "human_approval_contexts",
+    "sandbox_required",
+    "execution_mode",
+    "max_runtime_seconds",
+    "network_access",
+    "writes_files",
+    "resource_limits",
     "tools",
     "related_skills",
 }
 REQUIRED_INDEX_FIELDS = {"schema_version", "name", "version", "language", "description", "repository", "skill_count", "skills"}
 RISK_LEVELS = {"low", "medium", "high"}
+EXECUTION_MODES = {"analysis_only", "local_cli", "file_conversion", "external_application", "generates_script"}
+NETWORK_ACCESS = {"none", "optional", "required"}
 
 
 def issue(issues: list[dict[str, Any]], target: str, flag: str, message: str) -> None:
@@ -55,19 +64,39 @@ def load_index(issues: list[dict[str, Any]]) -> dict[str, Any]:
         return {}
 
 
-def check_schema_file(issues: list[dict[str, Any]]) -> None:
+def check_schema_file(issues: list[dict[str, Any]]) -> dict[str, Any]:
     path = ROOT / "manifest.schema.json"
     if not path.exists():
         issue(issues, "manifest.schema.json", "missing_file", "manifest.schema.json bulunamadı.")
-        return
+        return {}
     try:
         schema = json.loads(path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as exc:
         issue(issues, "manifest.schema.json", "invalid_json", str(exc))
-        return
+        return {}
     for field in ("$schema", "$defs", "required", "properties"):
         if field not in schema:
             issue(issues, "manifest.schema.json", "missing_schema_field", f"Eksik schema alanı: {field}")
+    return schema
+
+
+def schema_path(error_path: Any) -> str:
+    parts = [str(part) for part in error_path]
+    return ".".join(parts) if parts else "$"
+
+
+def validate_with_schema(target: str, payload: dict[str, Any], schema: dict[str, Any], issues: list[dict[str, Any]]) -> None:
+    validator = Draft202012Validator(schema)
+    for error in sorted(validator.iter_errors(payload), key=lambda item: list(item.path)):
+        issue(issues, target, "schema_validation_error", f"{schema_path(error.path)}: {error.message}")
+
+
+def skill_manifest_schema(root_schema: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "$schema": root_schema.get("$schema", "https://json-schema.org/draft/2020-12/schema"),
+        "$defs": root_schema.get("$defs", {}),
+        **root_schema.get("$defs", {}).get("skill_manifest", {}),
+    }
 
 
 def load_manifest(skill_name: str, issues: list[dict[str, Any]]) -> dict[str, Any]:
@@ -107,6 +136,23 @@ def validate_manifest(skill_name: str, manifest: dict[str, Any], all_skill_names
     for field in ("dependency_groups", "tags", "triggers", "inputs", "outputs", "guardrails", "human_approval_contexts"):
         check_list(manifest.get(field), skill_name, field, issues)
     check_list(manifest.get("system_tools"), skill_name, "system_tools", issues, min_len=0)
+    if not isinstance(manifest.get("sandbox_required"), bool):
+        issue(issues, skill_name, "invalid_sandbox_required", "sandbox_required bool olmalıdır.")
+    if manifest.get("execution_mode") not in EXECUTION_MODES:
+        issue(issues, skill_name, "invalid_execution_mode", "execution_mode geçerli değil.")
+    if not isinstance(manifest.get("max_runtime_seconds"), int) or int(manifest.get("max_runtime_seconds", 0)) <= 0:
+        issue(issues, skill_name, "invalid_max_runtime_seconds", "max_runtime_seconds pozitif integer olmalıdır.")
+    if manifest.get("network_access") not in NETWORK_ACCESS:
+        issue(issues, skill_name, "invalid_network_access", "network_access none, optional veya required olmalıdır.")
+    if not isinstance(manifest.get("writes_files"), bool):
+        issue(issues, skill_name, "invalid_writes_files", "writes_files bool olmalıdır.")
+    limits = manifest.get("resource_limits")
+    if not isinstance(limits, dict):
+        issue(issues, skill_name, "invalid_resource_limits", "resource_limits dict olmalıdır.")
+    else:
+        for key in ("max_input_size_mb", "max_output_size_mb", "recommended_memory_mb"):
+            if not isinstance(limits.get(key), int) or int(limits.get(key, 0)) <= 0:
+                issue(issues, skill_name, "invalid_resource_limit", f"resource_limits.{key} pozitif integer olmalıdır.")
     if manifest.get("risk_level") not in RISK_LEVELS:
         issue(issues, skill_name, "invalid_risk_level", "risk_level low, medium veya high olmalıdır.")
     if not isinstance(manifest.get("requires_human_approval"), bool):
@@ -170,6 +216,12 @@ def validate_index(index: dict[str, Any], manifests: dict[str, dict[str, Any]], 
             "tools",
             "risk_level",
             "requires_human_approval",
+            "sandbox_required",
+            "execution_mode",
+            "max_runtime_seconds",
+            "network_access",
+            "writes_files",
+            "resource_limits",
         ):
             if item.get(field) != manifest.get(field):
                 issue(issues, name, "index_manifest_field_mismatch", f"Index ve manifest alanı farklı: {field}")
@@ -203,11 +255,18 @@ def main() -> int:
     skill_dirs = sorted(path.name for path in ROOT.iterdir() if path.is_dir() and (path / "SKILL.md").exists())
     all_skill_names = set(skill_dirs)
     manifests = {name: load_manifest(name, issues) for name in skill_dirs}
+    schema = check_schema_file(issues)
+    if schema:
+        manifest_schema = skill_manifest_schema(schema)
+        for name, manifest in manifests.items():
+            if manifest:
+                validate_with_schema(name, manifest, manifest_schema, issues)
     for name, manifest in manifests.items():
         validate_manifest(name, manifest, all_skill_names, issues)
-    check_schema_file(issues)
     index = load_index(issues)
     if index:
+        if schema:
+            validate_with_schema("skill-index.json", index, schema, issues)
         validate_index(index, manifests, issues)
     payload = {
         "summary": {

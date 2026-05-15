@@ -23,7 +23,7 @@ pip install -e ".[cad,bim,pdf-doc,spreadsheet,image-ocr,data-quality,communicati
 
 | Grup | Paketler | Kullanım |
 |---|---|---|
-| `core` | `PyYAML`, `Pillow`, `pypdf`, `pandas`, `XlsxWriter`, `requests`, `beautifulsoup4` | Manifest, temel doküman/tablo/görsel ve API yardımcıları. |
+| `core` | `PyYAML`, `Pillow`, `pypdf`, `pandas`, `XlsxWriter`, `requests`, `beautifulsoup4`, `jsonschema` | Manifest, JSON Schema doğrulama, temel doküman/tablo/görsel ve API yardımcıları. |
 | `cad` | `ezdxf[draw]` | DXF okuma, layer/entity/block kontrolü. |
 | `bim` | `ifcopenshell` | IFC model, space, eleman ve property/quantity okuma. |
 | `pdf-doc` | `python-docx`, `pdfplumber`, `PyMuPDF`, `markdown`, `odfpy`, `lxml` | DOCX/PDF/Markdown/ODF okuma, dönüştürme ve QA. |

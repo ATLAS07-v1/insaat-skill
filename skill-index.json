@@ -81,7 +81,17 @@
         "dokuman-standartlastirma-ve-formatlama"
       ],
       "risk_level": "medium",
-      "requires_human_approval": false
+      "requires_human_approval": false,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 120,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "cad-autocad-dwg-dxf-isleme",
@@ -155,7 +165,17 @@
         "metraj-ve-mahal-kontrolu"
       ],
       "risk_level": "medium",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "external_application",
+      "max_runtime_seconds": 300,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 500,
+        "max_output_size_mb": 500,
+        "recommended_memory_mb": 2048
+      }
     },
     {
       "name": "bim-revit-ifc-model-kontrolu",
@@ -229,7 +249,17 @@
         "teknik-sartname-ve-uygulama-kontrolu"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "external_application",
+      "max_runtime_seconds": 600,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 1024,
+        "max_output_size_mb": 1024,
+        "recommended_memory_mb": 4096
+      }
     },
     {
       "name": "blender-3d-modelleme-ve-render",
@@ -298,7 +328,17 @@
         "sketchup-konsept-ve-kutle-modelleme"
       ],
       "risk_level": "low",
-      "requires_human_approval": false
+      "requires_human_approval": false,
+      "sandbox_required": true,
+      "execution_mode": "generates_script",
+      "max_runtime_seconds": 600,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 250,
+        "max_output_size_mb": 1024,
+        "recommended_memory_mb": 4096
+      }
     },
     {
       "name": "sketchup-konsept-ve-kutle-modelleme",
@@ -366,7 +406,17 @@
         "blender-3d-modelleme-ve-render"
       ],
       "risk_level": "low",
-      "requires_human_approval": false
+      "requires_human_approval": false,
+      "sandbox_required": true,
+      "execution_mode": "generates_script",
+      "max_runtime_seconds": 300,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 250,
+        "max_output_size_mb": 512,
+        "recommended_memory_mb": 2048
+      }
     },
     {
       "name": "cizim-dosya-donusum-ve-qa",
@@ -443,7 +493,17 @@
         "bim-revit-ifc-model-kontrolu"
       ],
       "risk_level": "medium",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "file_conversion",
+      "max_runtime_seconds": 600,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 1024,
+        "max_output_size_mb": 1024,
+        "recommended_memory_mb": 4096
+      }
     },
     {
       "name": "insaat-hesaplamalar",
@@ -511,7 +571,17 @@
         "teklif-ve-maliyet-tablolama"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "metraj-ve-mahal-kontrolu",
@@ -588,7 +658,17 @@
         "teklif-ve-maliyet-tablolama"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 300,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 512,
+        "max_output_size_mb": 250,
+        "recommended_memory_mb": 2048
+      }
     },
     {
       "name": "teknik-sartname-ve-uygulama-kontrolu",
@@ -668,7 +748,17 @@
         "dokuman-standartlastirma-ve-formatlama"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "insaat-tasarim-ve-konsept",
@@ -742,7 +832,17 @@
         "sketchup-konsept-ve-kutle-modelleme"
       ],
       "risk_level": "medium",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "teklif-ve-maliyet-tablolama",
@@ -820,7 +920,17 @@
         "hakedis-ve-mutabakat-kontrolu"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "hakedis-ve-mutabakat-kontrolu",
@@ -898,7 +1008,17 @@
         "metraj-ve-mahal-kontrolu"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "tedarik-ve-malzeme-karsilastirma",
@@ -976,7 +1096,17 @@
         "teknik-sartname-ve-uygulama-kontrolu"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "optional",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "risk-guvenlik-ve-uygunluk-denetimi",
@@ -1058,7 +1188,17 @@
         "teknik-sartname-ve-uygulama-kontrolu"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "musteri-ve-taseron-iletisim-hazirlayici",
@@ -1139,7 +1279,17 @@
         "risk-guvenlik-ve-uygunluk-denetimi"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": false,
+      "execution_mode": "local_cli",
+      "max_runtime_seconds": 180,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 100,
+        "max_output_size_mb": 100,
+        "recommended_memory_mb": 512
+      }
     },
     {
       "name": "saha-fotograf-ve-kanit-analizi",
@@ -1222,7 +1372,17 @@
         "musteri-ve-taseron-iletisim-hazirlayici"
       ],
       "risk_level": "high",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "external_application",
+      "max_runtime_seconds": 600,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 2048,
+        "max_output_size_mb": 2048,
+        "recommended_memory_mb": 4096
+      }
     },
     {
       "name": "dokuman-standartlastirma-ve-formatlama",
@@ -1305,7 +1465,17 @@
         "teknik-sartname-ve-uygulama-kontrolu"
       ],
       "risk_level": "medium",
-      "requires_human_approval": true
+      "requires_human_approval": true,
+      "sandbox_required": true,
+      "execution_mode": "file_conversion",
+      "max_runtime_seconds": 300,
+      "network_access": "none",
+      "writes_files": true,
+      "resource_limits": {
+        "max_input_size_mb": 250,
+        "max_output_size_mb": 250,
+        "recommended_memory_mb": 1024
+      }
     }
   ]
 }

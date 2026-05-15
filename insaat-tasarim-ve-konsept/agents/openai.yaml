@@ -45,6 +45,15 @@ requires_human_approval: true
 human_approval_contexts:
 - teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
 - kaynak verisi eksik veya varsayım kullanılan çıktı
+sandbox_required: false
+execution_mode: local_cli
+max_runtime_seconds: 180
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 100
+  max_output_size_mb: 100
+  recommended_memory_mb: 512
 tools:
 - name: check_design_tools
   type: cli

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Quantity Handoff",
+  "type": "object",
+  "required": ["items"],
+  "properties": {
+    "project": {"type": "string"},
+    "source": {"type": "string"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "quantity", "unit"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "location": {"type": "string"},
+          "quantity": {"type": "number"},
+          "unit": {"type": "string"},
+          "source": {"type": "string"},
+          "qa_flags": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

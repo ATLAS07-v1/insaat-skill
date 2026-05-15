@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -260,6 +259,97 @@ SYSTEM_TOOLS = {
 }
 
 
+DEFAULT_RESOURCE_LIMITS = {
+    "max_input_size_mb": 100,
+    "max_output_size_mb": 100,
+    "recommended_memory_mb": 512,
+}
+
+
+EXECUTION_PROFILES: dict[str, dict[str, Any]] = {
+    "insaat-arac-kullanimlari": {
+        "sandbox_required": False,
+        "execution_mode": "local_cli",
+        "max_runtime_seconds": 120,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": DEFAULT_RESOURCE_LIMITS,
+    },
+    "cad-autocad-dwg-dxf-isleme": {
+        "sandbox_required": True,
+        "execution_mode": "external_application",
+        "max_runtime_seconds": 300,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 500, "max_output_size_mb": 500, "recommended_memory_mb": 2048},
+    },
+    "bim-revit-ifc-model-kontrolu": {
+        "sandbox_required": True,
+        "execution_mode": "external_application",
+        "max_runtime_seconds": 600,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 1024, "max_output_size_mb": 1024, "recommended_memory_mb": 4096},
+    },
+    "blender-3d-modelleme-ve-render": {
+        "sandbox_required": True,
+        "execution_mode": "generates_script",
+        "max_runtime_seconds": 600,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 250, "max_output_size_mb": 1024, "recommended_memory_mb": 4096},
+    },
+    "sketchup-konsept-ve-kutle-modelleme": {
+        "sandbox_required": True,
+        "execution_mode": "generates_script",
+        "max_runtime_seconds": 300,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 250, "max_output_size_mb": 512, "recommended_memory_mb": 2048},
+    },
+    "cizim-dosya-donusum-ve-qa": {
+        "sandbox_required": True,
+        "execution_mode": "file_conversion",
+        "max_runtime_seconds": 600,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 1024, "max_output_size_mb": 1024, "recommended_memory_mb": 4096},
+    },
+    "metraj-ve-mahal-kontrolu": {
+        "sandbox_required": True,
+        "execution_mode": "local_cli",
+        "max_runtime_seconds": 300,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 512, "max_output_size_mb": 250, "recommended_memory_mb": 2048},
+    },
+    "saha-fotograf-ve-kanit-analizi": {
+        "sandbox_required": True,
+        "execution_mode": "external_application",
+        "max_runtime_seconds": 600,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 2048, "max_output_size_mb": 2048, "recommended_memory_mb": 4096},
+    },
+    "dokuman-standartlastirma-ve-formatlama": {
+        "sandbox_required": True,
+        "execution_mode": "file_conversion",
+        "max_runtime_seconds": 300,
+        "network_access": "none",
+        "writes_files": True,
+        "resource_limits": {"max_input_size_mb": 250, "max_output_size_mb": 250, "recommended_memory_mb": 1024},
+    },
+    "tedarik-ve-malzeme-karsilastirma": {
+        "sandbox_required": False,
+        "execution_mode": "local_cli",
+        "max_runtime_seconds": 180,
+        "network_access": "optional",
+        "writes_files": True,
+        "resource_limits": DEFAULT_RESOURCE_LIMITS,
+    },
+}
+
+
 APPROVAL_CONTEXTS = {
     "high": [
         "teknik, mali, hukuki, İSG veya sözleşmesel nihai karar",
@@ -276,18 +366,17 @@ APPROVAL_CONTEXTS = {
 
 def read_frontmatter(skill_dir: Path) -> dict[str, str]:
     text = (skill_dir / "SKILL.md").read_text(encoding="utf-8-sig")
-    if not text.startswith("---"):
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
         raise SystemExit(f"Frontmatter yok: {skill_dir / 'SKILL.md'}")
-    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
-    if not match:
+    try:
+        end = next(index for index, line in enumerate(lines[1:], start=1) if line.strip() == "---")
+    except StopIteration:
         raise SystemExit(f"Frontmatter okunamadı: {skill_dir / 'SKILL.md'}")
-    data: dict[str, str] = {}
-    for line in match.group(1).splitlines():
-        if ":" not in line:
-            continue
-        key, value = line.split(":", 1)
-        data[key.strip()] = value.strip()
-    return data
+    data = yaml.safe_load("\n".join(lines[1:end])) or {}
+    if not isinstance(data, dict):
+        raise SystemExit(f"Frontmatter YAML nesnesi olmalıdır: {skill_dir / 'SKILL.md'}")
+    return {str(key): str(value) for key, value in data.items()}
 
 
 def display_name(name: str) -> str:
@@ -334,12 +423,27 @@ def guardrails(name: str, risk_level: str, approval_required: bool) -> list[str]
     return items
 
 
+def execution_profile(name: str) -> dict[str, Any]:
+    return EXECUTION_PROFILES.get(
+        name,
+        {
+            "sandbox_required": False,
+            "execution_mode": "local_cli",
+            "max_runtime_seconds": 180,
+            "network_access": "none",
+            "writes_files": True,
+            "resource_limits": DEFAULT_RESOURCE_LIMITS,
+        },
+    )
+
+
 def build_skill_manifest(name: str) -> dict[str, Any]:
     skill_dir = ROOT / name
     frontmatter = read_frontmatter(skill_dir)
     meta = META[name]
     risk_level = meta["risk_level"]
     approval_required = bool(meta["requires_human_approval"])
+    profile = execution_profile(name)
     return {
         "schema_version": SCHEMA_VERSION,
         "name": name,
@@ -360,6 +464,12 @@ def build_skill_manifest(name: str) -> dict[str, Any]:
         "risk_level": risk_level,
         "requires_human_approval": approval_required,
         "human_approval_contexts": APPROVAL_CONTEXTS[risk_level],
+        "sandbox_required": profile["sandbox_required"],
+        "execution_mode": profile["execution_mode"],
+        "max_runtime_seconds": profile["max_runtime_seconds"],
+        "network_access": profile["network_access"],
+        "writes_files": profile["writes_files"],
+        "resource_limits": profile["resource_limits"],
         "tools": list_tools(skill_dir),
         "related_skills": meta["related_skills"],
     }
@@ -401,6 +511,12 @@ def build_index(manifests: list[dict[str, Any]]) -> dict[str, Any]:
                 "related_skills": manifest["related_skills"],
                 "risk_level": manifest["risk_level"],
                 "requires_human_approval": manifest["requires_human_approval"],
+                "sandbox_required": manifest["sandbox_required"],
+                "execution_mode": manifest["execution_mode"],
+                "max_runtime_seconds": manifest["max_runtime_seconds"],
+                "network_access": manifest["network_access"],
+                "writes_files": manifest["writes_files"],
+                "resource_limits": manifest["resource_limits"],
             }
         )
     return {

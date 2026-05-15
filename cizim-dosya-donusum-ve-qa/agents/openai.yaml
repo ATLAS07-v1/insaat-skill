@@ -54,6 +54,15 @@ requires_human_approval: true
 human_approval_contexts:
 - teknik karar, teslim çıktısı veya üçüncü tarafla paylaşım
 - kaynak verisi eksik veya varsayım kullanılan çıktı
+sandbox_required: true
+execution_mode: file_conversion
+max_runtime_seconds: 600
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 1024
+  max_output_size_mb: 1024
+  recommended_memory_mb: 4096
 tools:
 - name: check_conversion_tools
   type: cli

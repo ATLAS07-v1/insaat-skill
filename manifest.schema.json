@@ -53,6 +53,29 @@
         "type": "string"
       }
     },
+    "resource_limits": {
+      "type": "object",
+      "required": [
+        "max_input_size_mb",
+        "max_output_size_mb",
+        "recommended_memory_mb"
+      ],
+      "properties": {
+        "max_input_size_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_size_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "recommended_memory_mb": {
+          "type": "integer",
+          "minimum": 128
+        }
+      },
+      "additionalProperties": false
+    },
     "tool": {
       "type": "object",
       "required": [
@@ -100,7 +123,13 @@
         "tools",
         "related_skills",
         "risk_level",
-        "requires_human_approval"
+        "requires_human_approval",
+        "sandbox_required",
+        "execution_mode",
+        "max_runtime_seconds",
+        "network_access",
+        "writes_files",
+        "resource_limits"
       ],
       "properties": {
         "name": {
@@ -164,6 +193,37 @@
         },
         "requires_human_approval": {
           "type": "boolean"
+        },
+        "sandbox_required": {
+          "type": "boolean"
+        },
+        "execution_mode": {
+          "type": "string",
+          "enum": [
+            "analysis_only",
+            "local_cli",
+            "file_conversion",
+            "external_application",
+            "generates_script"
+          ]
+        },
+        "max_runtime_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "network_access": {
+          "type": "string",
+          "enum": [
+            "none",
+            "optional",
+            "required"
+          ]
+        },
+        "writes_files": {
+          "type": "boolean"
+        },
+        "resource_limits": {
+          "$ref": "#/$defs/resource_limits"
         }
       },
       "additionalProperties": false
@@ -190,6 +250,12 @@
         "risk_level",
         "requires_human_approval",
         "human_approval_contexts",
+        "sandbox_required",
+        "execution_mode",
+        "max_runtime_seconds",
+        "network_access",
+        "writes_files",
+        "resource_limits",
         "tools",
         "related_skills"
       ],
@@ -255,6 +321,37 @@
         },
         "human_approval_contexts": {
           "$ref": "#/$defs/string_list"
+        },
+        "sandbox_required": {
+          "type": "boolean"
+        },
+        "execution_mode": {
+          "type": "string",
+          "enum": [
+            "analysis_only",
+            "local_cli",
+            "file_conversion",
+            "external_application",
+            "generates_script"
+          ]
+        },
+        "max_runtime_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "network_access": {
+          "type": "string",
+          "enum": [
+            "none",
+            "optional",
+            "required"
+          ]
+        },
+        "writes_files": {
+          "type": "boolean"
+        },
+        "resource_limits": {
+          "$ref": "#/$defs/resource_limits"
         },
         "tools": {
           "type": "array",

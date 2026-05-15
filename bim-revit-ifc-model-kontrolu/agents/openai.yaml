@@ -53,6 +53,15 @@ human_approval_contexts:
 - teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
 - üçüncü taraf gönderimi veya şirket adına taahhüt
 - resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+sandbox_required: true
+execution_mode: external_application
+max_runtime_seconds: 600
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 1024
+  max_output_size_mb: 1024
+  recommended_memory_mb: 4096
 tools:
 - name: check_bim_tools
   type: cli

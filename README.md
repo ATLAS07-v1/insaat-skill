@@ -4,6 +4,8 @@ Hermes/Codex benzeri agent'lerin kopyalayıp kullanabileceği inşaat operasyonl
 
 Bu paket yönetim agent'leri değil, doğrudan iş yapan yetenek skill'leri içerir: CAD/BIM, Blender/SketchUp, dosya dönüşümü, hesaplama, metraj, teknik şartname, tasarım, teklif, hakediş, tedarik, risk/uygunluk, iletişim, saha fotoğraf kanıtı ve doküman standardizasyonu.
 
+> Uyarı: LLM tarafından üretilen script, CAD/BIM dönüşüm komutu, Blender/SketchUp otomasyonu veya OCR/fotoğraf işleme komutları doğrudan host sistemde çalıştırılmamalıdır. `sandbox_required: true` olan skill'ler izole çalışma dizini, süre limiti ve kullanıcı onayı ile kullanılmalıdır.
+
 ## Skill Listesi
 
 - `insaat-arac-kullanimlari`
@@ -90,6 +92,13 @@ python scripts\run_examples.py --scenario quickstart
 ```
 
 Örnek girdiler ve açıklamalar [examples/README.md](examples/README.md) altında tutulur. Çıktılar varsayılan olarak `dist/example-runs/` altına yazılır.
+
+## Routing, Sınırlar ve Katkı
+
+- Skill seçim kuralları: [SKILL_ROUTING.md](SKILL_ROUTING.md)
+- Bilinen kapsam sınırları: [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md)
+- Yeni skill veya script ekleme süreci: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Skill'ler arası JSON handoff şemaları: [schemas/](schemas/)
 
 ## Release
 

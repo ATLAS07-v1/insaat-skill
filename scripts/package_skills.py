@@ -24,12 +24,15 @@ ROOT_FILES = [
     "DEPENDENCIES.md",
     "CHANGELOG.md",
     "RELEASE.md",
+    "KNOWN_LIMITATIONS.md",
+    "SKILL_ROUTING.md",
+    "CONTRIBUTING.md",
     "requirements.txt",
     "pyproject.toml",
     "manifest.schema.json",
     "skill-index.json",
 ]
-ROOT_DIRS = ["scripts"]
+ROOT_DIRS = ["scripts", "schemas"]
 EXAMPLE_DIR = "examples"
 IGNORE_PATTERNS = [
     ".git",
@@ -197,6 +200,12 @@ def build_package(args: argparse.Namespace) -> dict[str, Any]:
                 "system_tools": item.get("system_tools", []),
                 "risk_level": item.get("risk_level", ""),
                 "requires_human_approval": item.get("requires_human_approval", False),
+                "sandbox_required": item.get("sandbox_required", False),
+                "execution_mode": item.get("execution_mode", ""),
+                "max_runtime_seconds": item.get("max_runtime_seconds", 0),
+                "network_access": item.get("network_access", ""),
+                "writes_files": item.get("writes_files", False),
+                "resource_limits": item.get("resource_limits", {}),
                 "related_skills": [related for related in item.get("related_skills", []) if related in {entry["name"] for entry in selected_items}],
             }
         )

@@ -43,6 +43,15 @@ risk_level: low
 requires_human_approval: false
 human_approval_contexts:
 - nihai teslim veya üçüncü taraf paylaşımı
+sandbox_required: true
+execution_mode: generates_script
+max_runtime_seconds: 600
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 250
+  max_output_size_mb: 1024
+  recommended_memory_mb: 4096
 tools:
 - name: check_blender_tools
   type: cli

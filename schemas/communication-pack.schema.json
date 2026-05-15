@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Communication Pack",
+  "type": "object",
+  "required": ["messages"],
+  "properties": {
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["project", "subject", "recipient", "request"],
+        "properties": {
+          "id": {"type": "string"},
+          "project": {"type": "string"},
+          "subject": {"type": "string"},
+          "recipient": {"type": "string"},
+          "request": {"type": "string"},
+          "message_type": {"type": "string"},
+          "channel": {"type": "string"},
+          "references": {"type": ["array", "string"]},
+          "attachments": {"type": ["array", "string"]},
+          "body": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

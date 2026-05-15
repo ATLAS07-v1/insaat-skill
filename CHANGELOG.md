@@ -13,6 +13,10 @@ Bu dosya, yayınlanabilir repo sürümlerindeki kullanıcıya dönük değişikl
 - Manifest doğrulama, smoke testler ve GitHub Actions test hattı eklendi.
 - Paketleme ve kurulum araçları eklendi: `scripts/package_skills.py`, `scripts/install_skills.py`.
 - Quickstart örnek senaryosu ve `scripts/run_examples.py` eklendi.
+- Execution safety alanları eklendi: `sandbox_required`, `execution_mode`, `max_runtime_seconds`, `network_access`, `writes_files`, `resource_limits`.
+- JSON Schema tabanlı manifest/index doğrulaması eklendi.
+- Skill routing, handoff schema ve bilinen kapsam sınırları dokümante edildi.
+- Her skill'i temsil eden CLI smoke kapsamı ve release artifact testleri genişletildi.
 
 ## Unreleased
 

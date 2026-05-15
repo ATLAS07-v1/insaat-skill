@@ -51,6 +51,15 @@ human_approval_contexts:
 - teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
 - üçüncü taraf gönderimi veya şirket adına taahhüt
 - resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+sandbox_required: false
+execution_mode: local_cli
+max_runtime_seconds: 180
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 100
+  max_output_size_mb: 100
+  recommended_memory_mb: 512
 tools:
 - name: calculate_progress_payment
   type: cli

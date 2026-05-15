@@ -49,6 +49,15 @@ human_approval_contexts:
 - teknik, mali, hukuki, İSG veya sözleşmesel nihai karar
 - üçüncü taraf gönderimi veya şirket adına taahhüt
 - resmi onay, ödeme, satın alma, hakediş, teslim veya uygunluk beyanı
+sandbox_required: true
+execution_mode: local_cli
+max_runtime_seconds: 300
+network_access: none
+writes_files: true
+resource_limits:
+  max_input_size_mb: 512
+  max_output_size_mb: 250
+  recommended_memory_mb: 2048
 tools:
 - name: check_metraj_tools
   type: cli

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cost Table Input",
+  "type": "object",
+  "required": ["items"],
+  "properties": {
+    "project": {"type": "string"},
+    "currency": {"type": "string"},
+    "markups": {"type": "object"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "quantity", "unit_price", "unit"],
+        "properties": {
+          "code": {"type": "string"},
+          "description": {"type": "string"},
+          "category": {"type": "string"},
+          "quantity": {"type": "number"},
+          "unit": {"type": "string"},
+          "unit_price": {"type": "number"},
+          "waste_percent": {"type": "number"},
+          "source": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

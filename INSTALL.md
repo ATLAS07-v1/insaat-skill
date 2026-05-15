@@ -2,6 +2,12 @@
 
 Bu repo, Hermes/Codex benzeri agent'lerin skill klasörlerini doğrudan kopyalayarak kullanabileceği şekilde düzenlenmiştir.
 
+## Güvenli Çalıştırma Uyarısı
+
+LLM tarafından üretilen Python/Ruby scriptleri, CAD/BIM dönüşüm komutları, Blender/SketchUp otomasyonları ve OCR/fotoğraf işleme akışları host işletim sisteminde doğrudan çalıştırılmamalıdır. `agents/openai.yaml` içindeki `sandbox_required`, `max_runtime_seconds`, `network_access`, `writes_files` ve `resource_limits` alanları çalışma izni verirken dikkate alınmalıdır.
+
+Agent şu işlemleri kullanıcı onayı olmadan yapmamalıdır: overwrite, silme, üçüncü tarafa gönderim, resmi onay, ödeme, satın alma, hukuki/İSG/teknik bağlayıcı karar.
+
 ## En Hızlı Kullanım
 
 Tüm skill setini bir hedef skill klasörüne kopyalamak için:
