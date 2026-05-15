@@ -1,0 +1,36 @@
+{
+  "requirements": [
+    {
+      "id": "HSE-001",
+      "category": "HSE",
+      "source": "Site HSE plan",
+      "requirement": "Valid permit to work before facade access",
+      "mandatory": true,
+      "evidence_required": true,
+      "owner": "Site HSE",
+      "due_date": "2026-05-10",
+      "status": "pending"
+    },
+    {
+      "id": "QA-001",
+      "category": "QA",
+      "source": "ITP",
+      "requirement": "Concrete cube test result is recorded",
+      "mandatory": true,
+      "evidence_required": true,
+      "owner": "QA Engineer",
+      "due_date": "2026-05-20",
+      "status": "pending"
+    },
+    {
+      "id": "ARCH-001",
+      "category": "Architecture",
+      "source": "Shop drawing procedure",
+      "requirement": "Material sample approval is logged",
+      "mandatory": false,
+      "evidence_required": false,
+      "owner": "Architect",
+      "status": "approved"
+    }
+  ]
+}

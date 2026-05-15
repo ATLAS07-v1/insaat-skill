@@ -1,0 +1,23 @@
+{
+  "project": "Demo Tower",
+  "currency": "TRY",
+  "markups": {
+    "overhead_percent": 10,
+    "profit_percent": 5,
+    "contingency_percent": 0,
+    "discount_percent": 0,
+    "vat_percent": 20
+  },
+  "items": [
+    {
+      "code": "CON-001",
+      "description": "C30 concrete",
+      "category": "Concrete",
+      "quantity": 10,
+      "unit": "m3",
+      "unit_price": 2500,
+      "waste_percent": 5,
+      "source": "Supplier quote SQ-001"
+    }
+  ]
+}

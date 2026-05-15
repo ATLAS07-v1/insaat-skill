@@ -81,6 +81,17 @@ Manifest ve index doğrulaması için:
 python scripts/validate_skill_manifest.py --format markdown
 ```
 
+## Test ve CI
+
+Yerel smoke testleri çalıştırmak için:
+
+```powershell
+python -m pip install -e ".[dev]"
+python -m pytest
+```
+
+GitHub Actions hattı her push ve pull request için manifest doğrulaması ile pytest smoke testlerini çalıştırır.
+
 ## Güvenlik ve Onay Sınırı
 
 Bu skill seti teknik, mali, hukuki, İSG veya sözleşmesel nihai onay üretmez. Çıktılar ön analiz, taslak, kontrol listesi ve karar destek amaçlıdır. Yetkili mühendis, İSG uzmanı, hukuk, finans veya proje yönetimi onayı gereken noktalarda skill dosyalarındaki guardrail'ler esas alınmalıdır.
