@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: saha-fotograf-ve-kanit-analizi
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Saha Fotoğraf ve Kanıt Analizi
 description: İnşaat saha fotoğrafları, video kareleri ve görsel kanıtlar için EXIF/metadata, hash, OCR, mahal/konum, ilerleme,

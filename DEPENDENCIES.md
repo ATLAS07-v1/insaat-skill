@@ -74,6 +74,20 @@ Bu araçlar Python paketi değildir; işletim sistemine ayrıca kurulmalıdır:
 - Docker: CVAT, Label Studio, WebODM gibi servisleri çalıştırma.
 - Java / Node.js: LanguageTool, markdownlint, Prettier, remark-lint gibi QA araçları.
 
+Kurulu ortamı JSON veya Markdown olarak denetlemek için:
+
+```bash
+python scripts/check_system_tools.py --format markdown
+python scripts/check_system_tools.py --skill cad-autocad-dwg-dxf-isleme --format json
+```
+
+Çıktı durumları:
+
+- `available`: araç veya Python modülü bulundu.
+- `missing_required`: temel çalışma için gerekli Python modülü eksik.
+- `missing_optional`: domain'e özel opsiyonel paket veya açık kaynak CLI eksik.
+- `manual_install_required`: ticari/harici uygulama manuel lisans ve kurulum gerektirir.
+
 ## Notlar
 
 - Birçok script opsiyonel paket yoksa anlaşılır hata mesajı veya araç durumu üretir.

@@ -46,6 +46,8 @@ REQUIRED_INDEX_FIELDS = {"schema_version", "name", "version", "language", "descr
 RISK_LEVELS = {"low", "medium", "high"}
 EXECUTION_MODES = {"analysis_only", "local_cli", "file_conversion", "external_application", "generates_script"}
 NETWORK_ACCESS = {"none", "optional", "required"}
+SANDBOXED_EXECUTION_MODES = {"file_conversion", "external_application", "generates_script"}
+NETWORK_JUSTIFICATION_TOKENS = {"network", "internet", "url", "api", "kaynak"}
 
 
 def issue(issues: list[dict[str, Any]], target: str, flag: str, message: str) -> None:
@@ -120,6 +122,14 @@ def check_list(value: Any, target: str, field: str, issues: list[dict[str, Any]]
         issue(issues, target, "invalid_list", f"{field} en az {min_len} öğeli liste olmalıdır.")
 
 
+def has_network_guardrail(manifest: dict[str, Any]) -> bool:
+    guardrails = manifest.get("guardrails")
+    if not isinstance(guardrails, list):
+        return False
+    text = " ".join(str(item).lower() for item in guardrails)
+    return any(token in text for token in NETWORK_JUSTIFICATION_TOKENS)
+
+
 def validate_manifest(skill_name: str, manifest: dict[str, Any], all_skill_names: set[str], issues: list[dict[str, Any]]) -> None:
     missing = sorted(REQUIRED_MANIFEST_FIELDS - set(manifest))
     for field in missing:
@@ -157,6 +167,17 @@ def validate_manifest(skill_name: str, manifest: dict[str, Any], all_skill_names
         issue(issues, skill_name, "invalid_risk_level", "risk_level low, medium veya high olmalıdır.")
     if not isinstance(manifest.get("requires_human_approval"), bool):
         issue(issues, skill_name, "invalid_approval_flag", "requires_human_approval bool olmalıdır.")
+    if manifest.get("risk_level") == "high" and manifest.get("requires_human_approval") is not True:
+        issue(issues, skill_name, "high_risk_requires_human_approval", "risk_level high ise requires_human_approval true olmalıdır.")
+    if manifest.get("execution_mode") in SANDBOXED_EXECUTION_MODES and manifest.get("sandbox_required") is not True:
+        issue(
+            issues,
+            skill_name,
+            "execution_mode_requires_sandbox",
+            "file_conversion, external_application veya generates_script execution_mode sandbox_required true gerektirir.",
+        )
+    if manifest.get("network_access") != "none" and not has_network_guardrail(manifest):
+        issue(issues, skill_name, "network_access_requires_guardrail", "network_access none değilse guardrail içinde network gerekçesi bulunmalıdır.")
     tools = manifest.get("tools")
     check_list(tools, skill_name, "tools", issues, min_len=0)
     if isinstance(tools, list):

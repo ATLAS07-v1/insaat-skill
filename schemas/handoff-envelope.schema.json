@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ATLAS07-v1/insaat-skill/schemas/handoff-envelope.schema.json",
+  "title": "Construction Skill Handoff Envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "handoff_id",
+    "source_skill",
+    "target_skill",
+    "handoff_type",
+    "generated_at",
+    "source_files",
+    "assumptions",
+    "requires_human_approval",
+    "payload_schema",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "handoff_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "handoff_type": {
+      "type": "string",
+      "enum": [
+        "risk_register",
+        "evidence_register",
+        "quantity_handoff",
+        "cost_table_input",
+        "communication_pack",
+        "document_manifest",
+        "generic"
+      ]
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_data": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "requires_human_approval": {
+      "type": "boolean"
+    },
+    "approval_context": {
+      "type": "string"
+    },
+    "payload_schema": {
+      "type": "string",
+      "enum": [
+        "schemas/risk-register.schema.json",
+        "schemas/evidence-register.schema.json",
+        "schemas/quantity-handoff.schema.json",
+        "schemas/cost-table-input.schema.json",
+        "schemas/communication-pack.schema.json",
+        "schemas/document-manifest.schema.json",
+        "none"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "validation_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "requires_human_approval": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "approval_context"
+        ],
+        "properties": {
+          "approval_context": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

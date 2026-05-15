@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: hakedis-ve-mutabakat-kontrolu
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Hakediş ve Mutabakat Kontrolü
 description: İnşaat hakediş, ara ödeme, kesin hesap, metraj-mutabakat, fatura-ödeme eşleştirme, taşeron hakedişi, avans, teminat,

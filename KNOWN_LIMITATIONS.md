@@ -1,15 +1,16 @@
 # Known Limitations
 
-Bu dosya `v0.1.0` için bilinçli kapsam sınırlarını ve güvenli kullanım notlarını listeler.
+Bu dosya `v0.1.1` için bilinçli kapsam sınırlarını ve güvenli kullanım notlarını listeler.
 
 ## Execution Safety
 
 - LLM tarafından üretilen Python, Ruby, Blender, SketchUp veya CAD komutları doğrudan host işletim sisteminde çalıştırılmamalıdır.
 - `sandbox_required: true` olan skill'ler izole çalışma dizini, süre limiti ve mümkünse container veya VM sınırı ile çalıştırılmalıdır.
 - Harici uygulama çağrıları dosya yazabilir, uzun sürebilir veya lisanslı/proprietary araç gerektirebilir.
+- AutoCAD, Revit, SketchUp, ODA File Converter ve benzeri ticari/lisanslı araçların lisans, kurulum ve kullanım sorumluluğu kullanıcıya aittir.
 - Agent, kullanıcı onayı olmadan dosya silme, overwrite, dış sisteme gönderim, satın alma, ödeme, resmi onay veya üçüncü taraf iletişimi yapmamalıdır.
 
-## v0.1.0 Kapsam Dışı Alanlar
+## v0.1.1 Kapsam Dışı Alanlar
 
 Şu alanlar bu sürümde ayrı skill olarak yer almaz:
 

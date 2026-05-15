@@ -12,7 +12,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 SCHEMA_VERSION = "1.0.0"
 LANGUAGE = "tr"
 REPOSITORY = "https://github.com/ATLAS07-v1/insaat-skill"
@@ -403,7 +403,7 @@ def list_tools(skill_dir: Path) -> list[dict[str, str]]:
     return tools
 
 
-def guardrails(name: str, risk_level: str, approval_required: bool) -> list[str]:
+def guardrails(name: str, risk_level: str, approval_required: bool, network_access: str = "none") -> list[str]:
     items = [
         "Kaynak, varsayım, eksik veri ve çıktı sınırları açık yazılmalıdır.",
         "Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.",
@@ -418,6 +418,10 @@ def guardrails(name: str, risk_level: str, approval_required: bool) -> list[str]
         items.append("Kişisel veri, GPS, yüz, plaka ve hassas saha bilgileri paylaşım öncesi kontrol edilmelidir.")
     if "teklif" in name or "hakedis" in name or "tedarik" in name:
         items.append("Fiyat, ödeme, satın alma ve hakediş çıktıları yetkili finans/ticari onay gerektirir.")
+    if network_access != "none":
+        items.append(
+            "Network erişimi yalnızca kullanıcı tarafından verilen veya izinli kaynaklar için kullanılmalı; kaynak URL, zaman ve gerekçe kaydedilmelidir."
+        )
     if risk_level == "high":
         items.append("Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.")
     return items
@@ -460,7 +464,7 @@ def build_skill_manifest(name: str) -> dict[str, Any]:
         "triggers": meta["triggers"],
         "inputs": meta["inputs"],
         "outputs": meta["outputs"],
-        "guardrails": guardrails(name, risk_level, approval_required),
+        "guardrails": guardrails(name, risk_level, approval_required, profile["network_access"]),
         "risk_level": risk_level,
         "requires_human_approval": approval_required,
         "human_approval_contexts": APPROVAL_CONTEXTS[risk_level],

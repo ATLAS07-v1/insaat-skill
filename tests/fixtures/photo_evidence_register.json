@@ -1,0 +1,34 @@
+{
+  "photos": [
+    {
+      "evidence_id": "PH-001",
+      "file_path": "site/photo-001.jpg",
+      "file_name": "photo-001.jpg",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "captured_at": "2026-05-15T10:30:00Z",
+      "project": "Demo Tower",
+      "location": "Level 02",
+      "subject": "Concrete pour evidence",
+      "source": "site engineer",
+      "exif_present": true,
+      "gps_present": false,
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "evidence_id": "PH-002",
+      "file_path": "site/photo-002.jpg",
+      "file_name": "photo-002.jpg",
+      "sha256": "",
+      "captured_at": "",
+      "project": "Demo Tower",
+      "location": "",
+      "subject": "Worker face visible near unsafe edge",
+      "source": "subcontractor",
+      "exif_present": false,
+      "gps_present": true,
+      "width": 320,
+      "height": 240
+    }
+  ]
+}

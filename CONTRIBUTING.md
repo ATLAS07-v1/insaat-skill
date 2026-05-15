@@ -37,11 +37,18 @@ Her skill manifestinde şu alanlar bulunmalıdır:
 
 Harici uygulama, generated script, CAD/BIM/OCR veya dosya dönüşümü içeren skill'lerde `sandbox_required: true` kullanılmalıdır.
 
+Çapraz policy kuralları validator tarafından kontrol edilir:
+
+- `risk_level: high` ise `requires_human_approval: true` olmalıdır.
+- `execution_mode` `generates_script`, `external_application` veya `file_conversion` ise `sandbox_required: true` olmalıdır.
+- `network_access` `none` değilse guardrail içinde network/kaynak gerekçesi bulunmalıdır.
+
 ## Test Beklentisi
 
 - Her skill en az bir smoke test ile temsil edilmelidir.
 - Opsiyonel bağımlılık yoksa script anlaşılır hata veya plan çıktısı üretmelidir.
 - Yeni handoff formatı eklenirse `schemas/` altında JSON Schema dosyası eklenmelidir.
+- Ajanlar arası genel aktarım için `schemas/handoff-envelope.schema.json` ortak zarfı kullanılmalıdır.
 
 ## Release Öncesi
 
@@ -51,5 +58,6 @@ Release öncesi şu komutlar geçmelidir:
 python scripts\validate_skill_manifest.py --format markdown
 python -m pytest
 python scripts\run_examples.py --scenario quickstart
-python scripts\build_release_artifacts.py --version v0.1.0 --output-dir dist\release
+python scripts\build_release_artifacts.py --version v0.1.1 --output-dir dist\release
+python scripts\verify_release_package.py dist\release\insaat-skill-seti.zip --work-dir dist\release-verify
 ```

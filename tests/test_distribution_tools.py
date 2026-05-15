@@ -49,8 +49,10 @@ def test_package_skills_builds_portable_subset(tmp_path: Path) -> None:
     assert payload["status"] == "ok"
     assert payload["skill_count"] == 2
     assert (package_dir / "skill-index.json").exists()
+    assert (package_dir / "LICENSE").exists()
     assert (package_dir / "scripts" / "install_skills.py").exists()
     assert (package_dir / "schemas" / "risk-register.schema.json").exists()
+    assert (package_dir / "schemas" / "handoff-envelope.schema.json").exists()
     assert not (package_dir / "examples").exists()
     assert (package_dir / "insaat-arac-kullanimlari" / "SKILL.md").exists()
     assert (package_dir / "dokuman-standartlastirma-ve-formatlama" / "agents" / "openai.yaml").exists()

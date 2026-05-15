@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: bim-revit-ifc-model-kontrolu
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: BIM Revit IFC Model Kontrolü
 description: Revit/IFC/BIM modellerini açık kaynak araçlarla güvenli incelemek, Revit'ten IFC export rotası planlamak, IFC

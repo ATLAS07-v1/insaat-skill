@@ -1,0 +1,24 @@
+{
+  "units": "m",
+  "site": {
+    "width": 24,
+    "depth": 32
+  },
+  "building": {
+    "width": 10,
+    "depth": 14,
+    "floors": 3,
+    "floor_height": 3.1
+  },
+  "setbacks": {
+    "front": 4,
+    "rear": 4,
+    "left": 3,
+    "right": 3
+  },
+  "scenes": [
+    "Vaziyet",
+    "Genel Perspektif"
+  ],
+  "output_skp": "fixture_concept.skp"
+}

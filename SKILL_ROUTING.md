@@ -36,4 +36,6 @@ Bu doküman agent'in 17 skill arasında deterministik seçim yapması için kull
 
 - Handoff çıktısı JSON veya Markdown özet olabilir.
 - Makine-okunur çıktı için `schemas/` altındaki schema dosyaları tercih edilir.
+- Skill'ler arası genel aktarımda `schemas/handoff-envelope.schema.json` ortak zarf olarak kullanılmalıdır.
+- `payload_schema`, zarf içindeki `payload` alanının hangi domain şemasıyla yorumlanacağını göstermelidir.
 - Handoff sırasında kaynak dosya, varsayım, tarih, onay sınırı ve eksik veri bayrakları korunmalıdır.

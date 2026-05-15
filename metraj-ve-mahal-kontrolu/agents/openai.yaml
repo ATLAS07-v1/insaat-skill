@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: metraj-ve-mahal-kontrolu
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Metraj ve Mahal Kontrolü
 description: İnşaat, mimari, BIM, CAD, PDF ve tablo kaynaklarından mahal listesi, room/space schedule, metraj, alan, hacim,

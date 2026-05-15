@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: insaat-arac-kullanimlari
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: İnşaat Araç Kullanımları
 description: İnşaat operasyonunda PDF, Excel, CSV, CAD/DWG/DXF, IFC/BIM, görsel, klasör ve arşiv girdilerini incelemek, doğru

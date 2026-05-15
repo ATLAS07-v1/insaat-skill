@@ -67,6 +67,12 @@ pip install -e ".[cad,bim,pdf-doc,spreadsheet,image-ocr,data-quality,communicati
 
 Bağımlılık grupları ve sistem araçları için [DEPENDENCIES.md](DEPENDENCIES.md) dosyasına bakın.
 
+Kurulu Python paketleri ve opsiyonel sistem araçlarını raporlamak için:
+
+```powershell
+python scripts\check_system_tools.py --format markdown
+```
+
 ## Kurulum ve Paketleme
 
 Skill'leri bir agent skill klasörüne kopyalamak için:
@@ -98,14 +104,16 @@ python scripts\run_examples.py --scenario quickstart
 - Skill seçim kuralları: [SKILL_ROUTING.md](SKILL_ROUTING.md)
 - Bilinen kapsam sınırları: [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md)
 - Yeni skill veya script ekleme süreci: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Skill'ler arası JSON handoff şemaları: [schemas/](schemas/)
+- Skill'ler arası JSON handoff şemaları ve ortak zarf: [schemas/](schemas/)
+- Lisans: [LICENSE](LICENSE)
 
 ## Release
 
 Yayın artifact'lerini yerelde üretmek için:
 
 ```powershell
-python scripts\build_release_artifacts.py --version v0.1.0 --output-dir dist\release
+python scripts\build_release_artifacts.py --version v0.1.1 --output-dir dist\release
+python scripts\verify_release_package.py dist\release\insaat-skill-seti.zip --work-dir dist\release-verify
 ```
 
 Release süreci ve tag tabanlı GitHub Actions yayını için [RELEASE.md](RELEASE.md) dosyasına bakın.

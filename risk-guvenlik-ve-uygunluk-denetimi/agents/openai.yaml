@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: risk-guvenlik-ve-uygunluk-denetimi
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Risk Güvenlik ve Uygunluk Denetimi
 description: İnşaat risk kaydı, İSG saha denetimi, çalışma izni, uygunsuzluk, kanıt/evidence kontrolü, BIM/IFC IDS uyumluluk

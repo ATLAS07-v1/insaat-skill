@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: dokuman-standartlastirma-ve-formatlama
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Doküman Standartlaştırma ve Formatlama
 description: İnşaat proje dokümanları için DOCX, PDF, Markdown, XLSX, ODT, teknik rapor, şartname, method statement, toplantı

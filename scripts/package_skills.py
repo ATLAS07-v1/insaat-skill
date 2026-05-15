@@ -27,6 +27,7 @@ ROOT_FILES = [
     "KNOWN_LIMITATIONS.md",
     "SKILL_ROUTING.md",
     "CONTRIBUTING.md",
+    "LICENSE",
     "requirements.txt",
     "pyproject.toml",
     "manifest.schema.json",

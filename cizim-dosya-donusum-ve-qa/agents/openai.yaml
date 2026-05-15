@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: cizim-dosya-donusum-ve-qa
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Çizim Dosya Dönüşüm ve QA
 description: İnşaat, mimari, BIM, CAD, PDF, görsel ve 3D model dosyalarında DWG, DXF, PDF, IFC, RVT, SKP, OBJ, FBX, GLB, STL,

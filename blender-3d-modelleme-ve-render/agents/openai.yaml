@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: blender-3d-modelleme-ve-render
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Blender 3D Modelleme ve Render
 description: İnşaat, mimari, iç mekan, cephe, şantiye ve BIM/IFC bağlamında Blender ile ölçülü 3D kütle model, konsept sahne,

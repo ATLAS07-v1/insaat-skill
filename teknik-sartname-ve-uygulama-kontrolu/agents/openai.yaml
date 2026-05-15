@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: teknik-sartname-ve-uygulama-kontrolu
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Teknik Şartname ve Uygulama Kontrolü
 description: İnşaat teknik şartname, uygulama kriteri, malzeme onayı, test raporu, tolerans, saha kanıtı ve BIM/IDS/BCF uygunsuzluk

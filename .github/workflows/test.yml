@@ -27,3 +27,11 @@ jobs:
 
       - name: Run tests
         run: python -m pytest
+
+      - name: Run quickstart examples
+        run: python scripts/run_examples.py --scenario quickstart --output-dir dist/example-runs/ci-quickstart --format json
+
+      - name: Build and verify release package
+        run: |
+          python scripts/build_release_artifacts.py --version v0.1.1 --output-dir dist/release --format json
+          python scripts/verify_release_package.py dist/release/insaat-skill-seti.zip --work-dir dist/release-verify --format json

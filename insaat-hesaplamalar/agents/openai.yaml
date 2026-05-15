@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: insaat-hesaplamalar
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: İnşaat Hesaplamalar
 description: İnşaat, mimari, kaba yapı, ince işler, metraj, malzeme, alan, hacim, kazı-dolgu, beton, kalıp, donatı, birim

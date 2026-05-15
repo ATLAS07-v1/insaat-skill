@@ -46,6 +46,9 @@ jobs:
           fi
           python scripts/build_release_artifacts.py --version "$VERSION" --output-dir dist/release --format json
 
+      - name: Verify release archive
+        run: python scripts/verify_release_package.py dist/release/insaat-skill-seti.zip --work-dir dist/release-verify --format json
+
       - name: Upload release artifact bundle
         uses: actions/upload-artifact@v7
         with:

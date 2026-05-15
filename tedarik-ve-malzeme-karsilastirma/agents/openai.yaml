@@ -1,6 +1,6 @@
 schema_version: 1.0.0
 name: tedarik-ve-malzeme-karsilastirma
-version: 0.1.0
+version: 0.1.1
 language: tr
 display_name: Tedarik ve Malzeme Karşılaştırma
 description: İnşaat tedarik, RFQ, tedarikçi teklif karşılaştırma, malzeme teknik uygunluk, datasheet/sertifika/numune kontrolü,
@@ -44,6 +44,8 @@ guardrails:
 - Bu skill karar destek ve çıktı hazırlama amacı taşır; yetkili onay yerine geçmez.
 - Hukuki, finansal, İSG, teknik veya üçüncü taraf taahhüdü doğuran kararlar insan onayı gerektirir.
 - Fiyat, ödeme, satın alma ve hakediş çıktıları yetkili finans/ticari onay gerektirir.
+- Network erişimi yalnızca kullanıcı tarafından verilen veya izinli kaynaklar için kullanılmalı; kaynak URL, zaman ve gerekçe
+  kaydedilmelidir.
 - Yüksek riskli çıktılarda nihai karar kullanıcı veya yetkili uzman tarafından doğrulanmalıdır.
 risk_level: high
 requires_human_approval: true

@@ -2,6 +2,19 @@
 
 Bu dosya, yayınlanabilir repo sürümlerindeki kullanıcıya dönük değişiklikleri takip eder.
 
+## v0.1.1 - 2026-05-15
+
+v0.1.0 sonrası agent denetim raporlarına göre mini sertleştirme sürümü.
+
+- Ortak `schemas/handoff-envelope.schema.json` zarfı eklendi.
+- Manifest validator'a çapraz execution policy kontrolleri eklendi.
+- Release ZIP'i açıp paketin içinden manifest validator ve quickstart çalıştıran `scripts/verify_release_package.py` eklendi.
+- CI ve release workflow'ları release paketini içerden doğrulayacak şekilde genişletildi.
+- MIT `LICENSE` eklendi ve paket çıktısına dahil edildi.
+- Ortam araç uygunluğu için kök `scripts/check_system_tools.py` eklendi.
+- CAD/BIM/Blender/SketchUp/fotoğraf kanıt akışları için hedefli smoke/fixture testleri eklendi.
+- Sistem araç, lisans, handoff envelope ve release doğrulama dokümantasyonu güncellendi.
+
 ## v0.1.0 - 2026-05-15
 
 İlk yayınlanabilir inşaat skill seti.

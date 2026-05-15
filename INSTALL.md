@@ -74,6 +74,12 @@ Repo veya paket kökünde doğrulama için:
 python scripts\validate_skill_manifest.py --format markdown
 ```
 
+Kurulu Python paketleri, opsiyonel açık kaynak CLI araçları ve manuel kurulum gerektiren ticari/harici araçları raporlamak için:
+
+```powershell
+python scripts\check_system_tools.py --format markdown
+```
+
 Örnek senaryo kontrolü için:
 
 ```powershell
@@ -83,7 +89,8 @@ python scripts\run_examples.py --scenario quickstart
 Release paketi bütünlüğünü kontrol etmek için:
 
 ```powershell
-python scripts\build_release_artifacts.py --version v0.1.0 --output-dir dist\release
+python scripts\build_release_artifacts.py --version v0.1.1 --output-dir dist\release
+python scripts\verify_release_package.py dist\release\insaat-skill-seti.zip --work-dir dist\release-verify
 Get-Content dist\release\SHA256SUMS.txt
 ```
 
