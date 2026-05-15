@@ -45,6 +45,14 @@ python scripts\package_skills.py --output-dir dist --name risk-paketi --skill ri
 
 Paket klasörü repo düzenini korur: `skill-index.json`, `manifest.schema.json`, `scripts/` ve skill klasörleri aynı seviyede kalır. Bu sayede paket açıldıktan sonra `scripts/install_skills.py` doğrudan çalıştırılabilir.
 
+Tam paketlerde `examples/` klasörü de bulunur. Sadece seçili skill paketi üretildiğinde örnekler varsayılan olarak eklenmez; gerekiyorsa `--include-examples` kullanılabilir.
+
+Örnekleri pakete dahil etmeden paket üretmek için:
+
+```powershell
+python scripts\package_skills.py --no-examples --force
+```
+
 ## Kurulum Sonrası Kontrol
 
 Kopyalanan skill klasörlerinde en az şu dosyalar bulunmalıdır:
@@ -58,6 +66,12 @@ Repo veya paket kökünde doğrulama için:
 
 ```powershell
 python scripts\validate_skill_manifest.py --format markdown
+```
+
+Örnek senaryo kontrolü için:
+
+```powershell
+python scripts\run_examples.py --scenario quickstart
 ```
 
 ## Onay Sınırı

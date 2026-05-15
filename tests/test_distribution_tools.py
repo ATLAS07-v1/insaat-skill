@@ -50,6 +50,7 @@ def test_package_skills_builds_portable_subset(tmp_path: Path) -> None:
     assert payload["skill_count"] == 2
     assert (package_dir / "skill-index.json").exists()
     assert (package_dir / "scripts" / "install_skills.py").exists()
+    assert not (package_dir / "examples").exists()
     assert (package_dir / "insaat-arac-kullanimlari" / "SKILL.md").exists()
     assert (package_dir / "dokuman-standartlastirma-ve-formatlama" / "agents" / "openai.yaml").exists()
     assert manifest["skill_count"] == 2
@@ -122,6 +123,27 @@ def test_install_skills_copies_selected_skill_from_package(tmp_path: Path) -> No
     assert install_payload["copied_count"] == 1
     assert (installed_skill / "SKILL.md").exists()
     assert (installed_skill / "agents" / "openai.yaml").exists()
+
+
+def test_full_package_includes_quickstart_examples(tmp_path: Path) -> None:
+    payload, status = run_json(
+        "scripts/package_skills.py",
+        "--output-dir",
+        str(tmp_path),
+        "--name",
+        "full-package",
+        "--force",
+        "--no-zip",
+        "--format",
+        "json",
+    )
+
+    package_dir = Path(payload["package_dir"])
+    example_input = package_dir / "examples" / "quickstart" / "inputs" / "risk_register.json"
+
+    assert status == 0
+    assert payload["skill_count"] == 17
+    assert example_input.exists()
 
 
 def test_install_skills_blocks_existing_target_without_force(tmp_path: Path) -> None:

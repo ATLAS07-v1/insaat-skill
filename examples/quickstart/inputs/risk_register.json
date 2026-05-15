@@ -1,0 +1,34 @@
+{
+  "risks": [
+    {
+      "id": "R-001",
+      "activity": "Scaffold installation",
+      "hazard": "Fall from height",
+      "location": "Block A facade",
+      "likelihood": 4,
+      "severity": 5,
+      "residual_likelihood": 3,
+      "residual_severity": 4,
+      "controls": "guardrail; full body harness",
+      "evidence": "",
+      "owner": "Site HSE",
+      "due_date": "2026-05-10",
+      "status": "open"
+    },
+    {
+      "id": "R-002",
+      "activity": "Housekeeping",
+      "hazard": "Trip hazard",
+      "location": "Ground floor",
+      "likelihood": 2,
+      "severity": 2,
+      "residual_likelihood": 1,
+      "residual_severity": 2,
+      "controls": "daily cleanup",
+      "evidence": "photo-001.jpg",
+      "owner": "Foreman",
+      "due_date": "2026-05-20",
+      "status": "open"
+    }
+  ]
+}

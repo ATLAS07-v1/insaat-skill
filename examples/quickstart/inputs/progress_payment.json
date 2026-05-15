@@ -1,0 +1,24 @@
+{
+  "project": "Demo Tower",
+  "payment_no": "1",
+  "period": "2026-05",
+  "currency": "TRY",
+  "deductions": {
+    "retention_percent": 5,
+    "vat_percent": 20
+  },
+  "items": [
+    {
+      "code": "CON-001",
+      "description": "C30 concrete",
+      "category": "Concrete",
+      "unit": "m3",
+      "contract_quantity": 100,
+      "unit_price": 2500,
+      "previous_quantity": 10,
+      "current_quantity": 12,
+      "approved_current_quantity": 11,
+      "source": "Site measurement sheet MS-001"
+    }
+  ]
+}

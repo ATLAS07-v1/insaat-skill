@@ -1,0 +1,10 @@
+{
+  "evidence": [
+    {
+      "id": "EV-001",
+      "requirement_id": "QA-001",
+      "status": "approved",
+      "file": "cube-test-result.pdf"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "id": "MSG-001",
+      "project": "Demo Tower",
+      "subject": "Submittal receipt confirmation",
+      "recipient": "Client PM",
+      "request": "Please confirm receipt.",
+      "message_type": "general",
+      "channel": "email"
+    },
+    {
+      "id": "MSG-002",
+      "project": "Demo Tower",
+      "subject": "Variation impact notice",
+      "recipient": "Client PM",
+      "request": "Please review the variation impact.",
+      "message_type": "variation_notice_draft",
+      "channel": "email",
+      "references": "Contract clause 5.2",
+      "body": "Ek bedel ve gecikme etkisi vardir."
+    }
+  ]
+}

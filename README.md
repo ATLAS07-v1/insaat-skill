@@ -81,6 +81,16 @@ python scripts\package_skills.py --force
 
 Ayrıntılı kurulum ve paketleme adımları için [INSTALL.md](INSTALL.md) dosyasına bakın.
 
+## Örnek Senaryolar
+
+Quickstart örneğini çalıştırmak için:
+
+```powershell
+python scripts\run_examples.py --scenario quickstart
+```
+
+Örnek girdiler ve açıklamalar [examples/README.md](examples/README.md) altında tutulur. Çıktılar varsayılan olarak `dist/example-runs/` altına yazılır.
+
 ## Manifest ve Doğrulama
 
 Kök `skill-index.json` dosyası tüm skill'lerin makine-okunur index'idir. Her skill içinde aynı şemayı kullanan `agents/openai.yaml` manifesti bulunur.

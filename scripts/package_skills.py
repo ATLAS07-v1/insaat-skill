@@ -28,6 +28,7 @@ ROOT_FILES = [
     "skill-index.json",
 ]
 ROOT_DIRS = ["scripts"]
+EXAMPLE_DIR = "examples"
 IGNORE_PATTERNS = [
     ".git",
     ".github",
@@ -100,6 +101,16 @@ def copy_root_dirs(source_root: Path, package_root: Path) -> list[str]:
     return copied
 
 
+def maybe_copy_examples(source_root: Path, package_root: Path, args: argparse.Namespace) -> bool:
+    source = source_root / EXAMPLE_DIR
+    if args.no_examples or not source.exists():
+        return False
+    if args.skill and not args.include_examples:
+        return False
+    copy_tree(source, package_root / EXAMPLE_DIR)
+    return True
+
+
 def filter_related_skills(package_root: Path, items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     selected_names = {item["name"] for item in items}
     filtered_items = copy.deepcopy(items)
@@ -163,6 +174,9 @@ def build_package(args: argparse.Namespace) -> dict[str, Any]:
     ensure_empty_dir(package_root, args.force)
     copied_files = copy_root_files(source_root, package_root)
     copied_dirs = copy_root_dirs(source_root, package_root)
+    examples_copied = maybe_copy_examples(source_root, package_root, args)
+    if examples_copied:
+        copied_dirs.append(EXAMPLE_DIR)
 
     copied_skills: list[dict[str, Any]] = []
     for item in selected_items:
@@ -232,6 +246,8 @@ def main() -> int:
     parser.add_argument("--output-dir", default=str(ROOT / "dist"), help="Directory where the package folder is created.")
     parser.add_argument("--name", default=DEFAULT_NAME, help="Package folder and archive name.")
     parser.add_argument("--skill", action="append", help="Skill name to include. Repeat for multiple skills. Defaults to all.")
+    parser.add_argument("--include-examples", action="store_true", help="Include examples even when packaging a skill subset.")
+    parser.add_argument("--no-examples", action="store_true", help="Skip example files.")
     parser.add_argument("--no-zip", action="store_true", help="Create only the package folder.")
     parser.add_argument("--force", action="store_true", help="Replace an existing output package folder.")
     parser.add_argument("--format", choices=["json", "markdown"], default="markdown")
